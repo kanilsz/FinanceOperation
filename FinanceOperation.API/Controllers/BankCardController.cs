@@ -1,30 +1,26 @@
-﻿using FinanceOperation.API.Core.Features.BankCards.Create;
-using FinanceOperation.API.Core.Features.BankCards.GetByCardNumber;
-using FinanceOperation.API.Domain.Cards;
-using FinanceOperation.API.Models;
+﻿using FinanceOperation.Api.InputModels;
+using FinanceOperation.Core.Features.BankCards;
+using FinanceOperation.Core.Features.BankCards.Create;
+using FinanceOperation.Core.Features.BankCards.GetByCardNumber;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FinanceOperation.API.Controllers
+namespace FinanceOperation.Api.Controllers
 {
     [Route("/v1/bankcards")]
     public class BankCardController : ControllerBase
     {
-
-        private readonly ILogger<BankCardController> _logger;
         private readonly IMediator _mediator;
 
-        public BankCardController(ILogger<BankCardController> logger, IMediator mediator)
+        public BankCardController(IMediator mediator)
         {
-            _logger = logger;
             _mediator = mediator;
         }
 
         [HttpGet("{cardNumber}")]
         public async Task<ActionResult> GetByCardNumber([FromRoute] string cardNumber)
         {
-            //TODO: SHOULD BE DTO
-            BankCard response = await _mediator.Send(new GetBankCardQueryFeature
+            BankCardDto response = await _mediator.Send(new GetByCardNumberQueryFeature
             {
                 CardNumber = cardNumber
             });
@@ -35,8 +31,6 @@ namespace FinanceOperation.API.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateBankCard([FromBody] CreateBankCardRequest request)
         {
-
-
             return Ok(await _mediator.Send(new CreateBankCardFeature
             {
                 CardNumber = request.CardNumber,
