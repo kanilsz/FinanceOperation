@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  financeoperation.api:
+    image: ${DOCKER_REGISTRY-}financeoperationapi
+    build:
+      context: .
+      dockerfile: FinanceOperation.Api/Dockerfile
