@@ -1,0 +1,9 @@
+﻿using AutoMapper;
+
+namespace FinanceOperation.Core.Mapping
+{
+    public interface IMapTo<T>
+    {
+        void MapTo(Profile profile) => profile.CreateMap(GetType(), typeof(T));
+    }
+}

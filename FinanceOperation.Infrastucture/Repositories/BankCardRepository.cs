@@ -1,10 +1,10 @@
-﻿using FinanceOperation.API.Core.Repositories;
-using FinanceOperation.API.Domain.Cards;
+﻿using FinanceOperation.Core.Repositories;
+using FinanceOperation.Domain.Cards;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Linq;
 using System.Net;
 
-namespace FinanceOperation.API.Infrastucture.Repositories
+namespace FinanceOperation.Infrastructure.Repositories
 {
     public class BankCardRepository : IBankCardRepository
     {
@@ -19,14 +19,14 @@ namespace FinanceOperation.API.Infrastucture.Repositories
             _container = cosmosClient.GetContainer(cosmosConfigs.DatabaseName, _containerName);
         }
 
-        public async Task<BankCard?> GetByCardNumber(string cardNumber, CancellationToken cancellationToken = default)
+        public async Task<BankCard?> GetByCardNumber(string? cardNumber, CancellationToken cancellationToken = default)
         {
             try
             {
                 ItemResponse<BankCard> response = await _container.ReadItemAsync<BankCard>(cardNumber, new(cardNumber), _requestOptions, cancellationToken);
                 return response.Resource;
             }
-            catch (CosmosException ce) when (ce.StatusCode == HttpStatusCode.NotFound)
+            catch (CosmosException cex) when (cex.StatusCode == HttpStatusCode.NotFound)
             {
                 return default;
             }
@@ -41,6 +41,7 @@ namespace FinanceOperation.API.Infrastucture.Repositories
         public async Task Create(BankCard bankCard, CancellationToken cancellationToken = default)
         {
             bankCard.CreatedAtUtc = DateTime.UtcNow;
+            bankCard.UpdatedAtUtc = bankCard.CreatedAtUtc;
             await _container.CreateItemAsync(bankCard, new(bankCard.Id), _requestOptions, cancellationToken);
         }
 

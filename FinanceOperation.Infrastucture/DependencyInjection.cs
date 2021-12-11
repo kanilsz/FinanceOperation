@@ -1,9 +1,11 @@
-﻿using FinanceOperation.API.Core;
-using FinanceOperation.API.Core.Repositories;
-using FinanceOperation.API.Infrastucture.Repositories;
+﻿using FinanceOperation.Core;
+using FinanceOperation.Core.Repositories;
+using FinanceOperation.Infrastructure.Repositories;
 using Microsoft.Azure.Cosmos;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace FinanceOperation.API.Infrastucture
+namespace FinanceOperation.Infrastructure
 {
     public static class DependencyInjection
     {

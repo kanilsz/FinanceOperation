@@ -1,8 +1,8 @@
-﻿using FinanceOperation.API.Core.Repositories;
-using FinanceOperation.API.Domain.Cards;
+﻿using FinanceOperation.Core.Repositories;
+using FinanceOperation.Domain.Cards;
 using MediatR;
 
-namespace FinanceOperation.API.Core.Features.BankCards.Create
+namespace FinanceOperation.Core.Features.BankCards.Create
 {
     public class CreateBankCardFeatureHandler : IRequestHandler<CreateBankCardFeature, Unit>
     {
@@ -15,12 +15,12 @@ namespace FinanceOperation.API.Core.Features.BankCards.Create
 
         public async Task<Unit> Handle(CreateBankCardFeature request, CancellationToken cancellationToken)
         {
-            BankCard bankCard = new BankCard()
+            BankCard bankCard = new()
             {
                 CardNumber = request.CardNumber,
                 Balance = request.Balance
             };
-            await _bankCardRepository.Create(bankCard);
+            await _bankCardRepository.Create(bankCard, cancellationToken);
 
             return Unit.Value;
         }
