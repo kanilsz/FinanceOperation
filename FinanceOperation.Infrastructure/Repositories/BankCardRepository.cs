@@ -45,6 +45,11 @@ namespace FinanceOperation.Infrastructure.Repositories
             await _container.CreateItemAsync(bankCard, new(bankCard.Id), _requestOptions, cancellationToken);
         }
 
+        public async Task Remove(string? cardNumber, CancellationToken cancellationToken = default)
+        {
+            await _container.DeleteItemAsync<BankCard>(cardNumber, new(cardNumber), _requestOptions, cancellationToken);
+        }
+
         public static void Initialize(Database database)
         {
             try
@@ -56,7 +61,6 @@ namespace FinanceOperation.Infrastructure.Repositories
             catch
             {
             }
-
         }
     }
 }
