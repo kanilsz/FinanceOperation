@@ -16,6 +16,7 @@ namespace FinanceOperation.Infrastructure
             services.InitializeCosmosDb(configuration);
 
             services.AddTransient<IBankCardRepository, BankCardRepository>();
+            services.AddTransient<IDiscountCardRepository, DiscountCardRepository>();
 
             return services;
         }
@@ -31,7 +32,9 @@ namespace FinanceOperation.Infrastructure
                 ? client.CreateDatabaseIfNotExistsAsync(cosmosConfigs.DatabaseName, cosmosConfigs.Throughput).GetAwaiter().GetResult()
                 : client.CreateDatabaseIfNotExistsAsync(cosmosConfigs.DatabaseName).GetAwaiter().GetResult();
 
+            
             BankCardRepository.Initialize(database);
+            DiscountCardRepository.Initialize(database);
 
             services.AddSingleton(client);
         }
