@@ -3,6 +3,7 @@ using FinanceOperation.Core.Features.Users;
 using FinanceOperation.Core.Features.Users.Create;
 using FinanceOperation.Core.Features.Users.GetUserInfo;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceOperation.Api.Controllers
@@ -33,6 +34,7 @@ namespace FinanceOperation.Api.Controllers
 
         [HttpGet("{userId}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserInfoDto))]
+        [AllowAnonymous]
         public async Task<ActionResult> GetUserCards([FromRoute] string userId)
         {
             return Ok(await _mediator.Send(new GetUserInfoFeature
