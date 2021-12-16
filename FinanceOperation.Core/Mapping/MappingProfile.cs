@@ -50,7 +50,7 @@ namespace FinanceOperation.Core.Mapping
                 var instance = Activator.CreateInstance(type);
 
                 MethodInfo? methodInfo = type.GetMethod("MapFrom")
-                    ?? type.GetInterface("IMapFrom`1")?.GetMethod("MapFrom");
+                    ?? type.GetInterface("IMapFrom`base")?.GetMethod("MapFrom");
 
                 methodInfo?.Invoke(instance, new object[] { this });
             }

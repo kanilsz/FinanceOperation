@@ -40,8 +40,6 @@ namespace FinanceOperation.Infrastructure.Repositories
 
         public async Task Create(BankCard bankCard, CancellationToken cancellationToken = default)
         {
-            bankCard.CreatedAtUtc = DateTime.UtcNow;
-            bankCard.UpdatedAtUtc = bankCard.CreatedAtUtc;
             await _container.CreateItemAsync(bankCard, new(bankCard.Id), _requestOptions, cancellationToken);
         }
 

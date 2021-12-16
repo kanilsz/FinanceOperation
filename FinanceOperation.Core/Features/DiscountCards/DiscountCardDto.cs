@@ -1,4 +1,5 @@
-﻿using FinanceOperation.Core.Mapping;
+﻿using AutoMapper;
+using FinanceOperation.Core.Mapping;
 using FinanceOperation.Domain.Cards;
 
 namespace FinanceOperation.Core.Features.DiscountCards
@@ -7,5 +8,11 @@ namespace FinanceOperation.Core.Features.DiscountCards
     {
         public string? CardNumber { get; set; }
         public double Balance { get; set; }
+
+        public void MapTo(Profile profile) => profile
+            .CreateMap<DiscountCardDto, DiscountCard>();
+
+        public void MapFrom(Profile profile) => profile
+          .CreateMap<DiscountCard, DiscountCardDto>();
     }
 }

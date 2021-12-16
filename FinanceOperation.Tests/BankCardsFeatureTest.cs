@@ -1,5 +1,4 @@
 using AutoMapper;
-using FinanceOperation.Core.Features.BankCards;
 using FinanceOperation.Core.Features.BankCards.Create;
 using FinanceOperation.Core.Features.BankCards.GetList;
 using FinanceOperation.Core.Mapping;
@@ -7,7 +6,6 @@ using FinanceOperation.Core.Repositories;
 using FinanceOperation.Domain.Cards;
 using MediatR;
 using Moq;
-using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,7 +16,6 @@ namespace FinanceOperation.Tests
     public class BankCardsFeatureTest
     {
         private static IMapper? _mapper;
-        private static DateTime _dateTime = DateTime.UtcNow;
         public BankCardsFeatureTest()
         {
             if (_mapper == null)
@@ -40,8 +37,6 @@ namespace FinanceOperation.Tests
             {
                 CardNumber = "Test1",
                 Balance = 1000,
-                CreatedAtUtc = _dateTime,
-                UpdatedAtUtc = _dateTime
             };
             var bankCardRequest = new CreateBankCardFeature
             {
@@ -87,22 +82,16 @@ namespace FinanceOperation.Tests
                     {
                         CardNumber = "Test1",
                         Balance = 1000,
-                        CreatedAtUtc = _dateTime,
-                        UpdatedAtUtc = _dateTime
                     },
                     new BankCard
                     {
                         CardNumber = "Test2",
                         Balance = 1000,
-                        CreatedAtUtc = _dateTime,
-                        UpdatedAtUtc = _dateTime
                     },
                     new BankCard
                     {
                         CardNumber = "Test3",
                         Balance = 1000,
-                        CreatedAtUtc = _dateTime,
-                        UpdatedAtUtc = _dateTime
                     },
                 };
 

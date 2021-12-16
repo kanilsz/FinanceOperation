@@ -21,8 +21,6 @@ namespace FinanceOperation.Infrastructure.Repositories
 
         public async Task Create(DiscountCard discountCard, CancellationToken cancellationToken = default)
         {
-            discountCard.CreatedAtUtc = DateTime.UtcNow;
-            discountCard.UpdatedAtUtc = discountCard.CreatedAtUtc;
             await _container.CreateItemAsync(discountCard, new(discountCard.Id), _requestOptions, cancellationToken);
         }
 
