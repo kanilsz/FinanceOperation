@@ -34,6 +34,7 @@ namespace FinanceOperation.Api.Controllers
 
         [HttpGet("{userId}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserInfoDto))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [AllowAnonymous]
         public async Task<ActionResult> GetUserCards([FromRoute] string userId)
         {
@@ -45,8 +46,8 @@ namespace FinanceOperation.Api.Controllers
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> CreateBankCard([FromBody] CreateUserRequest request)
         {
             return Created("/v1/user", await _mediator.Send(new CreateUserFeature

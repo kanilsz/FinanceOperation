@@ -42,7 +42,6 @@ namespace FinanceOperation.Api.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> CreateBankCard([FromBody] CreateDiscountCardRequest request)
         {
             return Created("/v1/discountcards", await _mediator.Send(new CreateDiscountCardFeature
@@ -54,6 +53,7 @@ namespace FinanceOperation.Api.Controllers
 
         [HttpDelete("{cardNumber}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> DeleteBankCard([FromRoute] string cardNumber)
         {
