@@ -2,10 +2,12 @@ name: .NET
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, develop ]
   pull_request:
-    branches: [ main ]
-
+    branches: [ main, develop ]
+env:
+  DOTNET_VERSION: '6.0.x'
+  
 jobs:
   build-and-test:
     name: build-and-test-${{matrix.os}}
