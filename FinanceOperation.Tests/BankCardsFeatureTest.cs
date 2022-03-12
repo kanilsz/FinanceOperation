@@ -55,49 +55,49 @@ namespace FinanceOperation.Tests
             Assert.Equal(Unit.Value, bankCardResponse);
         }
 
-        [Fact]
-        public async void GetBankCardsList()
-        {
-            //Arrange
-            var mockRepository = new Mock<IBankCardRepository>();
-            CancellationToken token = default;
-            var bankCardsRequest = new GetBankCardListFeature();
+        //[Fact]
+        //public async void GetBankCardsList()
+        //{
+        //    //Arrange
+        //    var mockRepository = new Mock<IBankCardRepository>();
+        //    CancellationToken token = default;
+        //    var bankCardsRequest = new GetBankCardListFeature();
 
-            mockRepository.Setup(repo => repo.GetBankCardsList(token)).Returns(GetListOfBankCard());
-            var command = new GetBankCardListFeatureHandler(mockRepository.Object, _mapper);
+        //    mockRepository.Setup(repo => repo.GetBankCardsList(token)).Returns(GetListOfBankCard());
+        //    var command = new GetBankCardListFeatureHandler(mockRepository.Object, _mapper);
 
-            //Act
-            var bankCardList = await command.Handle(bankCardsRequest, token);
+        //    //Act
+        //    var bankCardList = await command.Handle(bankCardsRequest, token);
 
-            //Assert
-            Assert.NotEmpty(bankCardList);
-           // var result = Assert.IsAssignableFrom<IEnumerable<BankCardDto>>(bankCardList);
-          // Assert.Equal((IEnumerable<BankCardDto>)_mapper.Map<BankCardDto>(GetListOfBankCard()),bankCardList);
+        //    //Assert
+        //    Assert.NotEmpty(bankCardList);
+        //   // var result = Assert.IsAssignableFrom<IEnumerable<BankCardDto>>(bankCardList);
+        //  // Assert.Equal((IEnumerable<BankCardDto>)_mapper.Map<BankCardDto>(GetListOfBankCard()),bankCardList);
 
-            async Task<IList<BankCard>> GetListOfBankCard()
-            {
-                var bankCardLists = new List<BankCard>()
-                {
-                    new BankCard
-                    {
-                        CardNumber = "Test1",
-                        Balance = 1000,
-                    },
-                    new BankCard
-                    {
-                        CardNumber = "Test2",
-                        Balance = 1000,
-                    },
-                    new BankCard
-                    {
-                        CardNumber = "Test3",
-                        Balance = 1000,
-                    },
-                };
+        //    async Task<IList<BankCard>> GetListOfBankCard()
+        //    {
+        //        var bankCardLists = new List<BankCard>()
+        //        {
+        //            new BankCard
+        //            {
+        //                CardNumber = "Test1",
+        //                Balance = 1000,
+        //            },
+        //            new BankCard
+        //            {
+        //                CardNumber = "Test2",
+        //                Balance = 1000,
+        //            },
+        //            new BankCard
+        //            {
+        //                CardNumber = "Test3",
+        //                Balance = 1000,
+        //            },
+        //        };
 
-                return await Task.FromResult(bankCardLists);
-            }
+        //        return await Task.FromResult(bankCardLists);
+        //    }
 
-        }
+        //}
     }
 }
