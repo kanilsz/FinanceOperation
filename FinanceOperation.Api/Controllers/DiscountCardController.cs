@@ -1,30 +1,37 @@
 ﻿using FinanceOperation.Api.InputModels;
-using FinanceOperation.Core.Features.BankCards;
-using FinanceOperation.Core.Features.BankCards.Create;
-using FinanceOperation.Core.Features.BankCards.Delete;
-using FinanceOperation.Core.Features.BankCards.GetByCardNumber;
-using FinanceOperation.Core.Features.BankCards.GetList;
+using FinanceOperation.Core.Features.DiscountCards;
+using FinanceOperation.Core.Features.DiscountCards.Create;
+using FinanceOperation.Core.Features.DiscountCards.Delete;
+using FinanceOperation.Core.Features.DiscountCards.GetByDiscountNumber;
+using FinanceOperation.Core.Features.DiscountCards.GetList;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceOperation.Api.Controllers
 {
-    [Route("/v1/bankcards")]
-    public class BankCardController : ControllerBase
+    [Route("/v1/discountcards")]
+    public class DiscountCardController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public BankCardController(IMediator mediator)
+        public DiscountCardController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DiscountCardDto))]
+        public async Task<ActionResult> GetBankCards()
+        {
+            return Ok(await _mediator.Send(new GetDiscountCardListFeature()));
+        }
+
         [HttpGet("{cardNumber}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BankCardDto))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DiscountCardDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> GetByCardNumber([FromRoute] string cardNumber)
         {
-           var response =  await _mediator.Send(new GetByCardNumberQueryFeature
+            var response = await _mediator.Send(new GetByDiscountNumberQueryFeature
             {
                 CardNumber = cardNumber
             });
@@ -35,21 +42,13 @@ namespace FinanceOperation.Api.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> CreateBankCard([FromBody] CreateBankCardRequest request)
+        public async Task<ActionResult> CreateBankCard([FromBody] CreateDiscountCardRequest request)
         {
-            return Created("/v1/bankcards", await _mediator.Send(new CreateBankCardFeature
+            return Created("/v1/discountcards", await _mediator.Send(new CreateDiscountCardFeature
             {
                 CardNumber = request.CardNumber,
                 Balance = request.Balance
             }));
-        }
-
-        [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BankCardDto))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> GetBankCards()
-        {
-            return Ok(await _mediator.Send(new GetBankCardListFeature()));
         }
 
         [HttpDelete("{cardNumber}")]
@@ -58,7 +57,7 @@ namespace FinanceOperation.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> DeleteBankCard([FromRoute] string cardNumber)
         {
-            await _mediator.Send(new DeleteBankCardFeature
+            await _mediator.Send(new DeleteDiscountCardFeature
             {
                 CardNumber = cardNumber
             });

@@ -2,7 +2,7 @@
 
 namespace FinanceOperation.Domain.Cards
 {
-    public class BankCard
+    public class DiscountCard
     {
         [JsonProperty(PropertyName = "id")]
         public string? Id => CardNumber;
