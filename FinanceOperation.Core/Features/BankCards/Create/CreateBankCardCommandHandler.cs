@@ -4,16 +4,16 @@ using MediatR;
 
 namespace FinanceOperation.Core.Features.BankCards.Create
 {
-    public class CreateBankCardFeatureHandler : IRequestHandler<CreateBankCardFeature, Unit>
+    public class CreateBankCardCommandHandler : IRequestHandler<CreateBankCardCommand, Unit>
     {
         private readonly IBankCardRepository _bankCardRepository;
 
-        public CreateBankCardFeatureHandler(IBankCardRepository bankCardRepository)
+        public CreateBankCardCommandHandler(IBankCardRepository bankCardRepository)
         {
             _bankCardRepository = bankCardRepository;
         }
 
-        public async Task<Unit> Handle(CreateBankCardFeature request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(CreateBankCardCommand request, CancellationToken cancellationToken)
         {
             BankCard bankCard = new()
             {

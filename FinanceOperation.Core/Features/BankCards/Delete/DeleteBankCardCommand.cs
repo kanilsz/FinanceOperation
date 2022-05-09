@@ -2,7 +2,7 @@
 
 namespace FinanceOperation.Core.Features.BankCards.Delete
 {
-    public class DeleteBankCardFeature : IRequest
+    public class DeleteBankCardCommand : IRequest
     {
         public string? CardNumber { get; set; }
     }

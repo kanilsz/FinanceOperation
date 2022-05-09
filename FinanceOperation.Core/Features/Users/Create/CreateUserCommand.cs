@@ -7,7 +7,7 @@ using MediatR;
 
 namespace FinanceOperation.Core.Features.Users.Create
 {
-    public class CreateUserFeature : IRequest, IMapTo<UserInfo>
+    public class CreateUserCommand : IRequest, IMapTo<UserInfo>
     {
         public string FirstName { get; set; }
         public string SecondName { get; set; }
@@ -16,7 +16,7 @@ namespace FinanceOperation.Core.Features.Users.Create
         public IEnumerable<DiscountCardDto> DiscountCards { get; set; }
 
         public void MapTo(Profile profile) => profile
-            .CreateMap<CreateUserFeature, UserInfo>()
+            .CreateMap<CreateUserCommand, UserInfo>()
             .ForMember(dest => dest.BankCards, opt => opt.Ignore())
             .ForMember(dest => dest.DiscountCards, opt => opt.Ignore());
     }

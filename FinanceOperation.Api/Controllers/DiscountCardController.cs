@@ -23,7 +23,7 @@ namespace FinanceOperation.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DiscountCardDto))]
         public async Task<ActionResult> GetBankCards()
         {
-            return Ok(await _mediator.Send(new GetDiscountCardListFeature()));
+            return Ok(await _mediator.Send(new GetDiscountCardListQuery()));
         }
 
         [HttpGet("{cardNumber}")]
@@ -31,7 +31,7 @@ namespace FinanceOperation.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> GetByCardNumber([FromRoute] string cardNumber)
         {
-            var response = await _mediator.Send(new GetByDiscountNumberQueryFeature
+            var response = await _mediator.Send(new GetByDiscountNumberQuery
             {
                 CardNumber = cardNumber
             });
@@ -44,7 +44,7 @@ namespace FinanceOperation.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> CreateBankCard([FromBody] CreateDiscountCardRequest request)
         {
-            return Created("/v1/discountcards", await _mediator.Send(new CreateDiscountCardFeature
+            return Created("/v1/discountcards", await _mediator.Send(new CreateDiscountCardCommand
             {
                 CardNumber = request.CardNumber,
                 Balance = request.Balance
@@ -57,7 +57,7 @@ namespace FinanceOperation.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> DeleteBankCard([FromRoute] string cardNumber)
         {
-            await _mediator.Send(new DeleteDiscountCardFeature
+            await _mediator.Send(new DeleteDiscountCardCommand
             {
                 CardNumber = cardNumber
             });

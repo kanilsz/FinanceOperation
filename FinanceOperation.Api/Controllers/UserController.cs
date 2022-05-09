@@ -50,7 +50,7 @@ namespace FinanceOperation.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> CreateBankCard([FromBody] CreateUserRequest request)
         {
-            return Created("/v1/user", await _mediator.Send(new CreateUserFeature
+            return Created("/v1/user", await _mediator.Send(new CreateUserCommand
             {
                 BankCards = request.BankCards,
                 DiscountCards = request.DiscountCards,

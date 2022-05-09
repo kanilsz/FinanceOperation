@@ -2,7 +2,7 @@
 
 namespace FinanceOperation.Core.Features.DiscountCards.GetList
 {
-    public class GetDiscountCardListFeature : IRequest<IEnumerable<DiscountCardDto>>
+    public class GetDiscountCardListQuery : IRequest<IEnumerable<DiscountCardDto>>
     {
     }
 }

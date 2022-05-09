@@ -2,7 +2,7 @@
 
 namespace FinanceOperation.Core.Features.BankCards.GetList
 {
-    public class GetBankCardListFeature : IRequest<IEnumerable<BankCardDto>>
+    public class GetBankCardListQuery : IRequest<IEnumerable<BankCardDto>>
     {
     }
 }

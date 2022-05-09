@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FinanceOperation.Core.Features.DiscountCards.Delete
 {
-    public class DeleteDiscountCardFeature : IRequest
+    public class DeleteDiscountCardCommand : IRequest
     {
         public string? CardNumber { get; set; }
     }

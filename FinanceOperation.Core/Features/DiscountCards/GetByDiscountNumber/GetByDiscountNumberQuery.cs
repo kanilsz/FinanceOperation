@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FinanceOperation.Core.Features.DiscountCards.GetByDiscountNumber
 {
-    public class GetByDiscountNumberQueryFeature : IRequest<DiscountCardDto>
+    public class GetByDiscountNumberQuery : IRequest<DiscountCardDto>
     {
         public string? CardNumber { get; set; }
     }

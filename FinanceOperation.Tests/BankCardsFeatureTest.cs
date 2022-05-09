@@ -38,14 +38,14 @@ namespace FinanceOperation.Tests
                 CardNumber = "Test1",
                 Balance = 1000,
             };
-            var bankCardRequest = new CreateBankCardFeature
+            var bankCardRequest = new CreateBankCardCommand
             {
                 CardNumber = "Test1",
                 Balance = 1000
             };
             CancellationToken token = default;
             mock.Setup(repo => repo.Create(bankCard, token)).Returns(Task.CompletedTask);
-            var command = new CreateBankCardFeatureHandler(mock.Object);
+            var command = new CreateBankCardCommandHandler(mock.Object);
 
             //Act
             var bankCardResponse = await command.Handle(bankCardRequest, token);
