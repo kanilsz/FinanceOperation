@@ -8,6 +8,7 @@ namespace FinanceOperation.Core.Features.Users
 {
     public class UserInfoDto : IMapFrom<UserInfo>, IMapTo<UserInfo>
     {
+        public string Id {get;set;}
         public string FirstName { get; set; }
         public string SecondName { get; set; }
         public string Email { get; set; }

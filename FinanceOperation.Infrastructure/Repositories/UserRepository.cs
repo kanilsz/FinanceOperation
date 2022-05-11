@@ -19,7 +19,7 @@ namespace FinanceOperation.Infrastructure.Repositories
             _container = cosmosClient.GetContainer(cosmosConfigs.DatabaseName, _containerName);
         }
 
-        public async Task<UserInfo> GetUserInfoList(string userId, CancellationToken cancellationToken = default)
+        public async Task<UserInfo> GetUserInfo(string userId, CancellationToken cancellationToken = default)
         {
             try
             {
@@ -37,6 +37,14 @@ namespace FinanceOperation.Infrastructure.Repositories
             await _container.CreateItemAsync(user, new(user.Id), _requestOptions, cancellationToken);
         }
 
+        public async Task<IList<UserInfo>> GetUsersInfoList(CancellationToken cancellationToken = default)
+        {
+            FeedResponse<UserInfo> response = await _container.GetItemLinqQueryable<UserInfo>()
+                                                        .ToFeedIterator()
+                                                        .ReadNextAsync(cancellationToken);
+            return response.ToList();
+        }
+
         public static void Initialize(Database database)
         {
             try
@@ -49,5 +57,6 @@ namespace FinanceOperation.Infrastructure.Repositories
             {
             }
         }
+
     }
 }
