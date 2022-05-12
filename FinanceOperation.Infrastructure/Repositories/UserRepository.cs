@@ -45,6 +45,16 @@ namespace FinanceOperation.Infrastructure.Repositories
             return response.ToList();
         }
 
+        public async Task Update(UserInfo user, CancellationToken cancellationToken = default)
+        {
+            await _container.ReplaceItemAsync(user, user.Id, new(user.Id), _requestOptions, cancellationToken);
+        }
+
+        public async Task Delete(string userId, CancellationToken cancellationToken = default)
+        {
+            await _container.DeleteItemAsync<UserInfo>(userId, new(userId), _requestOptions, cancellationToken);
+        }
+
         public static void Initialize(Database database)
         {
             try
@@ -57,6 +67,5 @@ namespace FinanceOperation.Infrastructure.Repositories
             {
             }
         }
-
     }
 }

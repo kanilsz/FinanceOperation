@@ -1,4 +1,4 @@
-﻿using FinanceOperation.Api.InputModels;
+﻿using FinanceOperation.Api.Models;
 using FinanceOperation.Core.Features.BankCards;
 using FinanceOperation.Core.Features.BankCards.Create;
 using FinanceOperation.Core.Features.BankCards.Delete;

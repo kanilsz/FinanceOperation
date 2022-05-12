@@ -1,8 +1,10 @@
-﻿using FinanceOperation.Api.InputModels;
+﻿using FinanceOperation.Api.Models;
 using FinanceOperation.Core.Features.Users;
 using FinanceOperation.Core.Features.Users.Create;
+using FinanceOperation.Core.Features.Users.Delete;
 using FinanceOperation.Core.Features.Users.GetUserInfo;
 using FinanceOperation.Core.Features.Users.GetUsersInfo;
+using FinanceOperation.Core.Features.Users.Update;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -35,11 +37,40 @@ namespace FinanceOperation.Api.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserInfoDto))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(UserInfoDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> GetUsersInfo()
         {
             return Ok(await _mediator.Send(new GetUsersInfoQuery()));
+        }
+
+        [HttpDelete("{id}")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> DeleteUser([FromRoute] string id)
+        {
+            await _mediator.Send(new DeleteUserCommand
+            {
+                Id = id
+            });
+            return NoContent();
+        }
+
+        [HttpPatch("{id}")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> UpdateUser([FromRoute] string id, [FromBody] UpdateUserRequest request)
+        {
+            await _mediator.Send(new UpdateUserCommand
+            {
+                Id = id,
+                FirstName = request.FirstName,
+                SecondName = request.SecondName,
+                Email = request.Email
+            });
+            return NoContent();
         }
 
         [HttpGet("{userId}")]
@@ -59,7 +90,7 @@ namespace FinanceOperation.Api.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        public async Task<ActionResult> CreateBankCard([FromBody] CreateUserRequest request)
+        public async Task<ActionResult> CreateUser([FromBody] CreateUserRequest request)
         {
             return Created("/v1/user", await _mediator.Send(new CreateUserCommand
             {

@@ -3,7 +3,7 @@ using FinanceOperation.Core.Features.DiscountCards;
 
 namespace FinanceOperation.Api.Models
 {
-    public class CreateUserRequest
+    public class UpdateUserRequest
     {
         public string FirstName { get; set; }
         public string SecondName { get; set; }

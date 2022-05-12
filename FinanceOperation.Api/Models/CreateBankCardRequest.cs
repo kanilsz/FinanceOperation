@@ -1,4 +1,4 @@
-namespace FinanceOperation.Api.InputModels
+namespace FinanceOperation.Api.Models
 {
     public class CreateBankCardRequest
     {
