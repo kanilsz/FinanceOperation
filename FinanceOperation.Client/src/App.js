@@ -1,7 +1,7 @@
 import './App.css';
 
 import { Home } from './Components/Home';
-import { Users } from './Components/UsersInformation/Users';
+import { Users } from './Components/UsersInformation/GetUsers';
 import { Navigation } from './Components/Navigation';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
