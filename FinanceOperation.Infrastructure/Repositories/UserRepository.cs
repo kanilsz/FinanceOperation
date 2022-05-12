@@ -19,7 +19,7 @@ namespace FinanceOperation.Infrastructure.Repositories
             _container = cosmosClient.GetContainer(cosmosConfigs.DatabaseName, _containerName);
         }
 
-        public async Task<UserInfo> GetUserInfoList(string userId, CancellationToken cancellationToken = default)
+        public async Task<UserInfo> GetUserInfo(string userId, CancellationToken cancellationToken = default)
         {
             try
             {
@@ -35,6 +35,24 @@ namespace FinanceOperation.Infrastructure.Repositories
         public async Task Create(UserInfo user, CancellationToken cancellationToken = default)
         {
             await _container.CreateItemAsync(user, new(user.Id), _requestOptions, cancellationToken);
+        }
+
+        public async Task<IList<UserInfo>> GetUsersInfoList(CancellationToken cancellationToken = default)
+        {
+            FeedResponse<UserInfo> response = await _container.GetItemLinqQueryable<UserInfo>()
+                                                        .ToFeedIterator()
+                                                        .ReadNextAsync(cancellationToken);
+            return response.ToList();
+        }
+
+        public async Task Update(UserInfo user, CancellationToken cancellationToken = default)
+        {
+            await _container.ReplaceItemAsync(user, user.Id, new(user.Id), _requestOptions, cancellationToken);
+        }
+
+        public async Task Delete(string userId, CancellationToken cancellationToken = default)
+        {
+            await _container.DeleteItemAsync<UserInfo>(userId, new(userId), _requestOptions, cancellationToken);
         }
 
         public static void Initialize(Database database)
