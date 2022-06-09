@@ -8,6 +8,7 @@ export class Users extends Component{
     constructor(props){
         super(props);
         this.state ={users:[], addModalShow: false, editModalShow: false}
+        this.refreshList();
     }
 
     refreshList(){
@@ -19,10 +20,6 @@ export class Users extends Component{
     }
 
     componentDidMount(){
-        this.refreshList();
-    }
-
-    componentDidUpdate(){
         this.refreshList();
     }
 

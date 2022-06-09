@@ -12,6 +12,7 @@ namespace FinanceOperation.Core.Features.Users
         public string FirstName { get; set; }
         public string SecondName { get; set; }
         public string Email { get; set; }
+        public string Password { get; set; }
         public IEnumerable<BankCardDto> BankCards { get; set; }
         public IEnumerable<DiscountCardDto> DiscountCards { get; set; }
 

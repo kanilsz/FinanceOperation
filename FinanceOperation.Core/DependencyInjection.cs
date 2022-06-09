@@ -10,7 +10,7 @@ namespace FinanceOperation.Core
         {
             services
                 .AddMediatR(typeof(DependencyInjection).Assembly)
-            .AddAutoMapper(typeof(MappingProfile).Assembly);//TODO: Should be implemented
+                .AddAutoMapper(typeof(MappingProfile).Assembly);//TODO: Should be implemented
             return services;
         }
     }

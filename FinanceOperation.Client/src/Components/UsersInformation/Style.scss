@@ -1,0 +1,19 @@
+.cardswrapper{
+    display:flex;
+    justify-content:space-between;
+    margin: 10px 10px 10px 10px;
+    #bankcards{
+        margin-left: 100px;
+        float:left;
+     }
+     
+    #discountcards{
+        margin-right: 100%;
+        float:right;
+     }
+  }
+
+.img{
+    width: 100px;
+    height: 50px;
+}

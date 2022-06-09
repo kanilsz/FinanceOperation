@@ -7,6 +7,7 @@ import { Navigation } from './Components/Navigation';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Login , Register} from './Components/Login/Index';
+import {GetUserCards} from './Components/UsersInformation/GetUserCards';
 
 class App extends Component{
 
@@ -18,34 +19,51 @@ class App extends Component{
     }
   }
 
-  changeState(){
-    const {isLoggingActive} = this.state;
-    if(isLoggingActive){
-      this.RightSide.classList.remove("right");
-      this.RightSide.classList.add("left");
-    } else{
-      this.RightSide.classList.remove("left");
-      this.RightSide.classList.add("right");
-    }
+  // changeState(){
+  //   const {isLoggingActive} = this.state;
+  //   if(isLoggingActive){
+  //     this.RightSide.classList.remove("right");
+  //     this.RightSide.classList.add("left");
+  //   } else{
+  //     this.RightSide.classList.remove("left");
+  //     this.RightSide.classList.add("right");
+  //   }
 
-    this.setState((prevState)=>({isLoggingActive: !prevState.isLoggingActive}));
-  }
+  //   this.setState((prevState)=>({isLoggingActive: !prevState.isLoggingActive}));
+  // }
 
-  render(){
-    const{isLoggingActive} = this.state;
-    const current = isLoggingActive ? "Register":"Login";
+  // render(){
+  //   const{isLoggingActive} = this.state;
+  //   const current = isLoggingActive ? "Register":"Login";
    
-    return(
-      <div className="App">
-        <div className='login'>
-          <div className='container'>
-            {isLoggingActive && <Login containerRef={(ref)=> this.current = ref} /> }
-            {!isLoggingActive && <Register containerRef={(ref)=> this.current = ref}/>}
-          </div>
-          <RightSide current={current} containerRef={ref => this.RightSide = ref} onClick={this.changeState.bind(this)}/>
-        </div>
-      </div>
-    );
+  //   return(
+  //     <div className="App">
+  //       <div className='login'>
+  //         <div className='container'>
+  //           {isLoggingActive && <Login containerRef={(ref)=> this.current = ref} /> }
+  //           {!isLoggingActive && <Register containerRef={(ref)=> this.current = ref}/>}
+  //         </div>
+  //         <RightSide current={current} containerRef={ref => this.RightSide = ref} onClick={this.changeState.bind(this)}/>
+  //       </div>
+  //     </div>
+  //   );
+  // }
+  render(){
+    return (
+    <BrowserRouter>
+    <div className="Nav">
+      <h3>
+        Personal Finance Operation
+      </h3>
+      <Navigation />
+      <Switch>
+        <Route path='/' component={Home} exact />
+        <Route path='/user' component={Users} />
+        <Route path='/usercards' component={GetUserCards} />
+      </Switch>
+    </div>
+  </BrowserRouter> 
+  );
   }
 }
 
@@ -56,17 +74,5 @@ const RightSide = props =>{
     </div>
   </div>
 }
-// {/* <BrowserRouter>
-//       <div className="App">
-//         <h3>
-//           Personal Finance Operation
-//         </h3>
-//         <Login/>
-//         <Navigation />
-//         <Switch>
-//           <Route path='/' component={Home} exact />
-//           <Route path='/user' component={Users} />
-//         </Switch>
-//       </div>
-//     </BrowserRouter> */}
+
 export default App;
