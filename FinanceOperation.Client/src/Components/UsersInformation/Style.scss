@@ -17,3 +17,21 @@
     width: 100px;
     height: 50px;
 }
+.pieWrapper{
+    display:flex;
+    justify-content:space-between;
+    h3{
+        text-align: center;
+    }
+    .pie1{
+        width: 500px;
+        height: 500px; 
+        float:left;
+    }
+    .pie2{
+        width: 500px;
+        height: 500px; 
+        float:right;
+    }
+   
+}

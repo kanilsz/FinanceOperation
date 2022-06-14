@@ -11,13 +11,12 @@ namespace FinanceOperation.Infrastructure
     {
         public static IServiceCollection AddInfrastucture(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddCore();
-
             services.InitializeCosmosDb(configuration);
 
             services.AddTransient<IBankCardRepository, BankCardRepository>();
             services.AddTransient<IDiscountCardRepository, DiscountCardRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<ITransactionRepository, TransactionRepository>();
 
             return services;
         }
@@ -36,6 +35,7 @@ namespace FinanceOperation.Infrastructure
             BankCardRepository.Initialize(database);
             DiscountCardRepository.Initialize(database);
             UserRepository.Initialize(database);
+            TransactionRepository.Initialize(database);
 
             services.AddSingleton(client);
         }

@@ -6,18 +6,21 @@ export class Navigation extends Component {
 
     render() {
         return (
-            <Navbar bg='dark' expand='lg'>
+            <Navbar bg='success' expand='lg'>
                 <Navbar.Toggle aria-controls='basic-navbar-nav' />
                 <Navbar.Collapse id='basic-navbar-nav'>
                     <Nav>
-                        <NavLink className='d-inline p-2 bg-dark text-white ' to='/'>
+                        <NavLink className='d-inline p-2 bg-success text-white ' to='/'>
                             Home
                         </NavLink>
-                        <NavLink className='d-inline p-2 bg-dark text-white ' to='/user'>
+                        <NavLink className='d-inline p-2 bg-success text-white ' to='/user'>
                             Users
                         </NavLink>
-                        <NavLink className='d-inline p-2 bg-dark text-white ' to='/usercards'>
+                        <NavLink className='d-inline p-2 bg-success text-white ' to='/usercards'>
                             User cards
+                        </NavLink>
+                        <NavLink className='d-inline p-2 bg-success text-white ' to='/userinoutcome'>
+                            User Income & Outcome
                         </NavLink>
                     </Nav>
                 </Navbar.Collapse>

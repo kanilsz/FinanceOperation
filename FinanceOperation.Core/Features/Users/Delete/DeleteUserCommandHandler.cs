@@ -14,7 +14,7 @@ namespace FinanceOperation.Core.Features.Users.Delete
 
         public async Task<Unit> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
-            await _userRepository.Delete(request.Id);
+            await _userRepository.Delete(request.Id, cancellationToken);
             return Unit.Value;
         }
     }

@@ -8,6 +8,7 @@ import { Navigation } from './Components/Navigation';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Login , Register} from './Components/Login/Index';
 import {GetUserCards} from './Components/UsersInformation/GetUserCards';
+import {GetUserInOutCome} from './Components/UsersInformation/GetUserInOutCome';
 
 class App extends Component{
 
@@ -53,13 +54,14 @@ class App extends Component{
     <BrowserRouter>
     <div className="Nav">
       <h3>
-        Personal Finance Operation
+        Personal Finance Operations
       </h3>
       <Navigation />
       <Switch>
         <Route path='/' component={Home} exact />
         <Route path='/user' component={Users} />
         <Route path='/usercards' component={GetUserCards} />
+        <Route path='/userinoutcome' component={GetUserInOutCome} />
       </Switch>
     </div>
   </BrowserRouter> 
