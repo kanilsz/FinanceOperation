@@ -55,7 +55,7 @@ namespace FinanceOperation.Infrastructure.Repositories
             await _container.DeleteItemAsync<UserInfo>(userId, new(userId), _requestOptions, cancellationToken);
         }
 
-        public static void Initialize(Database database)
+        internal static void Initialize(Database database)
         {
             try
             {

@@ -20,8 +20,8 @@ namespace FinanceOperation.Core.Features.Users.Create
         public async Task<Unit> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             UserInfo user = _mapper.Map<UserInfo>(request);
-            user.DiscountCards = _mapper.Map<IEnumerable<DiscountCard>>(request.DiscountCards);
-            user.BankCards = _mapper.Map<IEnumerable<BankCard>>(request.BankCards);
+            user.DiscountCards = _mapper.Map<IList<DiscountCard>>(request.DiscountCards);
+            user.BankCards = _mapper.Map<IList<BankCard>>(request.BankCards);
 
             await _userRepository.Create(user, cancellationToken);
 

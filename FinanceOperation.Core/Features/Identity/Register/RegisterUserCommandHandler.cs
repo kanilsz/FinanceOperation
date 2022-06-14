@@ -33,7 +33,7 @@ namespace FinanceOperation.Core.Features.Identity.Register
         {
             UserInfo user = _mapper.Map<UserInfo>(request);
 
-            await _userRepository.Create(user);
+            await _userRepository.Create(user, cancellationToken);
             return Unit.Value;
         }
     }

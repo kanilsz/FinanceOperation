@@ -7,7 +7,7 @@ import { Navigation } from './Components/Navigation';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Login , Register} from './Components/Login/Index';
-import {GetUserCards} from './Components/UsersInformation/GetUserCards';
+import {UserCards} from './Components/UsersInformation/UserCards';
 import {GetUserInOutCome} from './Components/UsersInformation/GetUserInOutCome';
 
 class App extends Component{
@@ -60,7 +60,7 @@ class App extends Component{
       <Switch>
         <Route path='/' component={Home} exact />
         <Route path='/user' component={Users} />
-        <Route path='/usercards' component={GetUserCards} />
+        <Route path='/usercards' component={UserCards} />
         <Route path='/userinoutcome' component={GetUserInOutCome} />
       </Switch>
     </div>

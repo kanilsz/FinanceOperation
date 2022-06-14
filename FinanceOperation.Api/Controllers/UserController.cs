@@ -1,7 +1,10 @@
 ﻿using FinanceOperation.Api.Models;
 using FinanceOperation.Core.Features.Users;
+using FinanceOperation.Core.Features.Users.AddBankCard;
+using FinanceOperation.Core.Features.Users.AddDiscountCard;
 using FinanceOperation.Core.Features.Users.Create;
 using FinanceOperation.Core.Features.Users.Delete;
+using FinanceOperation.Core.Features.Users.DeleteCards;
 using FinanceOperation.Core.Features.Users.GetUserCards;
 using FinanceOperation.Core.Features.Users.GetUserInfo;
 using FinanceOperation.Core.Features.Users.GetUsersInfo;
@@ -31,6 +34,60 @@ namespace FinanceOperation.Api.Controllers
             {
                 UserId = userId
             }));
+        }
+
+        [HttpDelete("{userId}/bankCards/{cardNumber}")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<ActionResult> DeleteUserBankCard([FromRoute] string userId, [FromRoute] string cardNumber)
+        {
+            await _mediator.Send(new DeleteUserBankCardCommand
+            {
+                UserId = userId,
+                CardNumber = cardNumber
+            });
+            return NoContent();
+        }
+
+        [HttpDelete("{userId}/discountCards/{cardNumber}")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<ActionResult> DeleteUserDiscountCard([FromRoute] string userId, [FromRoute] string cardNumber)
+        {
+            await _mediator.Send(new DeleteUserDiscountCardCommand
+            {
+                UserId = userId,
+                CardNumber = cardNumber
+            });
+            return NoContent();
+        }
+
+        [HttpPost("{userId}/bankCards")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<ActionResult> AddUserBankCard([FromRoute] string userId, [FromQuery] AddUserCardRequest request)
+        {
+            await _mediator.Send(new AddUserBankCardCommand
+            {
+                UserId = userId,
+                CardNumber = request.CardNumber,
+                Balance = request.Balance
+            });
+            return NoContent();
+        }
+
+        [HttpPost("{userId}/discountCards")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<ActionResult> AddUserDiscountCard([FromRoute] string userId, [FromQuery] AddUserCardRequest request)
+        {
+            await _mediator.Send(new AddUserDiscountCardCommand
+            {
+                UserId = userId,
+                CardNumber = request.CardNumber,
+                Balance = request.Balance
+            });
+            return NoContent();
         }
 
         [HttpGet]
