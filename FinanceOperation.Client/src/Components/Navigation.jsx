@@ -22,6 +22,9 @@ export class Navigation extends Component {
                         <NavLink className='d-inline p-2 bg-success text-white ' to='/userinoutcome'>
                             User Income & Outcome
                         </NavLink>
+                        <NavLink className='d-inline p-2 bg-success text-white ' to='/login'>
+                            Login
+                        </NavLink>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

@@ -1,36 +1,39 @@
 import React, {Component} from 'react'
 import logingImg from "../../logo.svg";
+import { withRouter } from 'react-router-dom';
 
 export class Login extends Component{
 
     constructor(props){
         super(props);
         this.login = this.login.bind(this);
+        
     }
 
     login(event){
-        event.preventDefault();
-        fetch(process.env.REACT_APP_API + 'users',{
-            method: 'POST',
-            headers:{
-                'Accept':'application/json',
-                'Content-Type':'application/json'
-            },
-            body: JSON.stringify({
-                FirstName: event.target.FirstName.value,
-                SecondName: event.target.SecondName.value,
-                Email: event.target.Email.value,
-                BankCards: null,
-                DiscountCards: null
-            })
-        })
-        .then(res=>res.json())
-        .then((result)=>{
-        },
-        (error)=>
-        {
-            alert("Failed to login user")
-        });
+        // event.preventDefault();
+        // fetch(process.env.REACT_APP_API + 'users',{
+        //     method: 'POST',
+        //     headers:{
+        //         'Accept':'application/json',
+        //         'Content-Type':'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //         FirstName: event.target.FirstName.value,
+        //         SecondName: event.target.SecondName.value,
+        //         Email: event.target.Email.value,
+        //         BankCards: null,
+        //         DiscountCards: null
+        //     })
+        // })
+        // .then(res=>res.json())
+        // .then((result)=>{
+        // },
+        // (error)=>
+        // {
+            //alert("Failed to login user");
+    //}
+        this.props.history.push("/");
     }
     
     render(){
@@ -52,8 +55,11 @@ export class Login extends Component{
                 </div>
             </div>
             <div className='footer'>
-                <button type='button' className='btn' onSubmit={this.login}>Login</button>
+                <button type='button' className='btn' onClick={this.login}>Login</button>
             </div>
         </div>       
     }
 }
+
+export default withRouter(Login);
+

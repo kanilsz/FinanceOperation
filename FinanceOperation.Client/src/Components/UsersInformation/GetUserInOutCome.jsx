@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ReactApexChart from 'react-apexcharts';
 
 export class GetUserInOutCome extends Component{

@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import {ButtonToolbar, Table} from 'react-bootstrap';
 import './Style.scss';
 import bankCardImg from "./Imgs/bankcard.png";
 import discountCardImg from "./Imgs/discountcard.png"
-import {Modal, Button, Row, Col, Form} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 
 export class UserCards extends Component{
 
@@ -34,8 +33,9 @@ export class UserCards extends Component{
                     'Content-Type':'application/json'
                 }
             });
+            this.getCardsList();
+            window.location.reload();
         }
-        this.getCardsList();
     }
 
     deleteUserDiscountCard(userId, cardNumber){
@@ -48,9 +48,9 @@ export class UserCards extends Component{
                     'Content-Type':'application/json'
                 }
             });
+            this.getCardsList();
+            window.location.reload();
         }
-        this.getCardsList();
-
     }
 
     addUserBankCard(event){
