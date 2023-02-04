@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FinanceOperation.Core.Mapping;
+using AutoMapper.Extensions.MappingProfile;
 using FinanceOperation.Domain.Cards;
 
 namespace FinanceOperation.Core.Features.BankCards

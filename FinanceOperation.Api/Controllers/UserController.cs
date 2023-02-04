@@ -65,12 +65,12 @@ namespace FinanceOperation.Api.Controllers
         [HttpPost("{userId}/bankCards")]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<ActionResult> AddUserBankCard([FromRoute] string userId, [FromQuery] AddUserCardRequest request)
+        public async Task<ActionResult> AddUserBankCard([FromRoute] string userId, [FromBody] AddUserCardRequest request)
         {
             await _mediator.Send(new AddUserBankCardCommand
             {
                 UserId = userId,
-                CardNumber = request.CardNumber,
+                CardNumber = request.CardNumber!,
                 Balance = request.Balance
             });
             return NoContent();
@@ -79,12 +79,12 @@ namespace FinanceOperation.Api.Controllers
         [HttpPost("{userId}/discountCards")]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<ActionResult> AddUserDiscountCard([FromRoute] string userId, [FromQuery] AddUserCardRequest request)
+        public async Task<ActionResult> AddUserDiscountCard([FromRoute] string userId, [FromBody] AddUserCardRequest request)
         {
             await _mediator.Send(new AddUserDiscountCardCommand
             {
                 UserId = userId,
-                CardNumber = request.CardNumber,
+                CardNumber = request.CardNumber!,
                 Balance = request.Balance
             });
             return NoContent();

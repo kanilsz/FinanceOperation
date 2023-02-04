@@ -26,7 +26,7 @@ namespace FinanceOperation.Infrastructure.Repositories
                 ItemResponse<UserInfo> response = await _container.ReadItemAsync<UserInfo>(userId, new(userId), _requestOptions, cancellationToken);
                 return response.Resource;
             }
-            catch (CosmosException cex) when (cex.StatusCode == HttpStatusCode.NotFound)
+            catch (CosmosException cex) when (cex.StatusCode is HttpStatusCode.NotFound)
             {
                 return default;
             }

@@ -1,14 +1,12 @@
+using System.Threading;
+using System.Threading.Tasks;
 using AutoMapper;
+using AutoMapper.Extensions.MappingProfile;
 using FinanceOperation.Core.Features.BankCards.Create;
-using FinanceOperation.Core.Features.BankCards.GetList;
-using FinanceOperation.Core.Mapping;
 using FinanceOperation.Core.Repositories;
 using FinanceOperation.Domain.Cards;
 using MediatR;
 using Moq;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace FinanceOperation.Tests

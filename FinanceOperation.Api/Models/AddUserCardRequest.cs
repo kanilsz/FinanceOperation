@@ -2,7 +2,7 @@
 {
     public class AddUserCardRequest
     {
-        public string CardNumber { get; set; }
+        public string? CardNumber { get; set; }
         public double Balance { get; set; }
     }
 }

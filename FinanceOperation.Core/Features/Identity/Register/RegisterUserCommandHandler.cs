@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
-using FinanceOperation.Core.Mapping;
+using AutoMapper.Extensions.MappingProfile;
 using FinanceOperation.Core.Repositories;
 using FinanceOperation.Domain.Users;
 using MediatR;
 
 namespace FinanceOperation.Core.Features.Identity.Register
 {
-
     public record RegisterUserCommand() : IRequest, IMapTo<UserInfo>
     {
         public string FirstName { get; set; }

@@ -24,8 +24,8 @@ namespace FinanceOperation.Core.Features.Users.GetUserCards
 
             return new CardsDto
             {
-                DiscountCards = _mapper.Map<IEnumerable<DiscountCardDto>>(userInfos.DiscountCards),
-                BankCards = _mapper.Map<IEnumerable<BankCardDto>>(userInfos.BankCards)
+                DiscountCards = _mapper.Map<IList<DiscountCardDto>>(userInfos.DiscountCards),
+                BankCards = _mapper.Map<IList<BankCardDto>>(userInfos.BankCards)
             };
         }
     }

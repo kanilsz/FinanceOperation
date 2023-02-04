@@ -1,4 +1,4 @@
-﻿using FinanceOperation.Core.Mapping;
+﻿using AutoMapper.Extensions.MappingProfile;
 using FinanceOperation.Domain.Transactions;
 
 namespace FinanceOperation.Core.Features.Transactions

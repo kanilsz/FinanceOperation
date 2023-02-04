@@ -23,7 +23,6 @@ namespace FinanceOperation.Core.Features.Users.AddDiscountCard
                 Balance = request.Balance
             });
 
-
             await _userRepository.Update(user, cancellationToken);
             return Unit.Value;
         }
