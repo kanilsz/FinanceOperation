@@ -12,10 +12,7 @@ RUN dotnet build "FinanceOperation.BlazorWebAssembly/FinanceOperation.BlazorWebA
 FROM build AS publish
 RUN dotnet publish "FinanceOperation.BlazorWebAssembly/FinanceOperation.BlazorWebAssembly.csproj" -c Release -o /app/publish
 
-FROM nginx:alpine
-WORKDIR /var/www/web
-COPY --from=build /app/output/wwwroot .
-
-COPY FinanceOperation.BlazorWebAssembly/nginx.conf /etc/nginx/nginx.conf
-EXPOSE 80
-EXPOSE 443
+FROM nginx:alpine AS final
+WORKDIR /usr/share/nginx/html
+COPY --from=publish /app/publish/wwwroot .
+COPY "FinanceOperation.BlazorWebAssembly/nginx.conf" /etc/nginx/nginx.conf
