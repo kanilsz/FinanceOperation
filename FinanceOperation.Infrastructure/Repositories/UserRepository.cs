@@ -26,7 +26,7 @@ namespace FinanceOperation.Infrastructure.Repositories
                 ItemResponse<UserInfo> response = await _container.ReadItemAsync<UserInfo>(userId, new(userId), _requestOptions, cancellationToken);
                 return response.Resource;
             }
-            catch (CosmosException cex) when (cex.StatusCode == HttpStatusCode.NotFound)
+            catch (CosmosException cex) when (cex.StatusCode is HttpStatusCode.NotFound)
             {
                 return default;
             }
@@ -55,7 +55,7 @@ namespace FinanceOperation.Infrastructure.Repositories
             await _container.DeleteItemAsync<UserInfo>(userId, new(userId), _requestOptions, cancellationToken);
         }
 
-        public static void Initialize(Database database)
+        internal static void Initialize(Database database)
         {
             try
             {

@@ -2,7 +2,13 @@ version: '3.4'
 
 services:
   financeoperation.api:
-    image: ${DOCKER_REGISTRY-}financeoperationapi
+    image: ${DOCKER_REGISTRY-}fonapi
     build:
       context: .
       dockerfile: FinanceOperation.Api/Dockerfile
+
+  financeoperation.blazorwebassembly:
+    image: ${DOCKER_REGISTRY-}fonblazorwebass
+    build:
+      context: .
+      dockerfile: FinanceOperation.BlazorWebAssembly/Dockerfile

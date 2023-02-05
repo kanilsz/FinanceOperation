@@ -17,7 +17,8 @@ namespace FinanceOperation.Domain.Users
         public string FirstName { get; set; }
         public string SecondName { get; set; }
         public string Email { get; set; }
-        public IEnumerable<BankCard> BankCards { get; set; }
-        public IEnumerable<DiscountCard> DiscountCards { get; set; }
+        public string Password { get; set; }
+        public IList<BankCard> BankCards { get; set; }
+        public IList<DiscountCard> DiscountCards { get; set; }
     }
 }

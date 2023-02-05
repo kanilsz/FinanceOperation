@@ -1,3 +1,4 @@
+using FinanceOperation.Core;
 using FinanceOperation.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -34,6 +35,8 @@ builder.Services.AddSwaggerGen(x =>
         }
     });
 });
+
+builder.Services.AddCore();
 builder.Services.AddInfrastucture(configuration);
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
 builder.Services.AddAuthorization(options =>

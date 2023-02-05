@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
+using AutoMapper.Extensions.MappingProfile;
 using FinanceOperation.Core.Features.BankCards;
 using FinanceOperation.Core.Features.DiscountCards;
-using FinanceOperation.Core.Mapping;
 using FinanceOperation.Domain.Users;
 using MediatR;
 

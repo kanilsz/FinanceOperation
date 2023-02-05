@@ -1,14 +1,12 @@
+using System.Threading;
+using System.Threading.Tasks;
 using AutoMapper;
+using AutoMapper.Extensions.MappingProfile;
 using FinanceOperation.Core.Features.BankCards.Create;
-using FinanceOperation.Core.Features.BankCards.GetList;
-using FinanceOperation.Core.Mapping;
 using FinanceOperation.Core.Repositories;
 using FinanceOperation.Domain.Cards;
 using MediatR;
 using Moq;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace FinanceOperation.Tests
@@ -61,18 +59,18 @@ namespace FinanceOperation.Tests
         //    //Arrange
         //    var mockRepository = new Mock<IBankCardRepository>();
         //    CancellationToken token = default;
-        //    var bankCardsRequest = new GetBankCardListFeature();
+        //    var bankCardsRequest = new GetBankCardListQuery();
 
         //    mockRepository.Setup(repo => repo.GetBankCardsList(token)).Returns(GetListOfBankCard());
-        //    var command = new GetBankCardListFeatureHandler(mockRepository.Object, _mapper);
+        //    var command = new GetBankCardListQueryHandler(mockRepository.Object, _mapper);
 
         //    //Act
         //    var bankCardList = await command.Handle(bankCardsRequest, token);
 
         //    //Assert
         //    Assert.NotEmpty(bankCardList);
-        //   // var result = Assert.IsAssignableFrom<IEnumerable<BankCardDto>>(bankCardList);
-        //  // Assert.Equal((IEnumerable<BankCardDto>)_mapper.Map<BankCardDto>(GetListOfBankCard()),bankCardList);
+        //    // var result = Assert.IsAssignableFrom<IEnumerable<BankCardDto>>(bankCardList);
+        //    // Assert.Equal((IEnumerable<BankCardDto>)_mapper.Map<BankCardDto>(GetListOfBankCard()),bankCardList);
 
         //    async Task<IList<BankCard>> GetListOfBankCard()
         //    {

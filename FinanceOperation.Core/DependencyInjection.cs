@@ -1,4 +1,4 @@
-﻿using FinanceOperation.Core.Mapping;
+﻿using AutoMapper.Extensions.MappingProfile;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,7 +10,7 @@ namespace FinanceOperation.Core
         {
             services
                 .AddMediatR(typeof(DependencyInjection).Assembly)
-            .AddAutoMapper(typeof(MappingProfile).Assembly);//TODO: Should be implemented
+                .AddMappingProfiles();
             return services;
         }
     }
