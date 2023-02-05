@@ -14,7 +14,7 @@ RUN dotnet publish "FinanceOperation.BlazorWebAssembly/FinanceOperation.BlazorWe
 
 FROM nginx:alpine
 WORKDIR /var/www/web
-COPY --from=build-env /app/output/wwwroot .
+COPY --from=build /app/output/wwwroot .
 
 COPY FinanceOperation.BlazorWebAssembly/nginx.conf /etc/nginx/nginx.conf
 EXPOSE 80
