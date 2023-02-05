@@ -1,13 +1,23 @@
 version: '3.4'
 
 services:
-  financeoperation.api:
+  financeoperation.blazorwebassembly:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
     ports:
-      - "80"
-      - "443"
+      - 5080:80
+      - 5443:443
     volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  financeoperation.api:
+    environment:
+      - aspnetcore_environment=development
+      - aspnetcore_urls=https://+:443;http://+:80
+    ports:
+      - 4080:80
+      - 4443:443
+    volumes:
+      - ${appdata}/microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+      - ${appdata}/asp.net/https:/root/.aspnet/https:ro
