@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FinanceOperation.Api.Controllers
+namespace FinanceOperation.Api.Features.Identities
 {
     [Route("/v1/identities")]
     public class IdentityController : ControllerBase
@@ -14,7 +14,7 @@ namespace FinanceOperation.Api.Controllers
         {
             _mediator = mediator;
         }
-    
+
         [HttpPost]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status201Created)]

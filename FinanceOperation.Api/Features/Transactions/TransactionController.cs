@@ -1,12 +1,11 @@
-﻿using FinanceOperation.Api.Models;
-using FinanceOperation.Core.Features.Transactions.Create;
+﻿using FinanceOperation.Core.Features.Transactions.Create;
 using FinanceOperation.Core.Features.Transactions.Delete;
 using FinanceOperation.Core.Features.Transactions.GetByUserId;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FinanceOperation.Api.Controllers
+namespace FinanceOperation.Api.Features.Transactions
 {
     [Route("v1/transactions")]
     public class TransactionController : ControllerBase

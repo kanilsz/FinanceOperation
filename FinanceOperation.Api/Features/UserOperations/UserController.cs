@@ -1,5 +1,4 @@
-﻿using FinanceOperation.Api.Models;
-using FinanceOperation.Core.Features.Users;
+﻿using FinanceOperation.Core.Features.Users;
 using FinanceOperation.Core.Features.Users.AddBankCard;
 using FinanceOperation.Core.Features.Users.AddDiscountCard;
 using FinanceOperation.Core.Features.Users.Create;
@@ -13,7 +12,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FinanceOperation.Api.Controllers
+namespace FinanceOperation.Api.Features.UserOperations
 {
     [Route("/v1/users")]
     public class UserController : ControllerBase

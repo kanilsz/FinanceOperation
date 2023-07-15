@@ -1,7 +1,7 @@
 ﻿using FinanceOperation.Core.Features.BankCards;
 using FinanceOperation.Core.Features.DiscountCards;
 
-namespace FinanceOperation.Api.Models
+namespace FinanceOperation.Api.Features.UserOperations
 {
     public class UpdateUserRequest
     {
