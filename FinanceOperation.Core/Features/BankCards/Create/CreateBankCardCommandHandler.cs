@@ -2,27 +2,26 @@
 using FinanceOperation.Domain.Cards;
 using MediatR;
 
-namespace FinanceOperation.Core.Features.BankCards.Create
+namespace FinanceOperation.Core.Features.BankCards.Create;
+
+public class CreateBankCardCommandHandler : IRequestHandler<CreateBankCardCommand, Unit>
 {
-    public class CreateBankCardCommandHandler : IRequestHandler<CreateBankCardCommand, Unit>
+    private readonly IBankCardRepository _bankCardRepository;
+
+    public CreateBankCardCommandHandler(IBankCardRepository bankCardRepository)
     {
-        private readonly IBankCardRepository _bankCardRepository;
+        _bankCardRepository = bankCardRepository;
+    }
 
-        public CreateBankCardCommandHandler(IBankCardRepository bankCardRepository)
+    public async Task<Unit> Handle(CreateBankCardCommand request, CancellationToken cancellationToken)
+    {
+        BankCard bankCard = new()
         {
-            _bankCardRepository = bankCardRepository;
-        }
+            CardNumber = request.CardNumber,
+            Balance = request.Balance
+        };
+        await _bankCardRepository.Create(bankCard, cancellationToken);
 
-        public async Task<Unit> Handle(CreateBankCardCommand request, CancellationToken cancellationToken)
-        {
-            BankCard bankCard = new()
-            {
-                CardNumber = request.CardNumber,
-                Balance = request.Balance
-            };
-            await _bankCardRepository.Create(bankCard, cancellationToken);
-
-            return Unit.Value;
-        }
+        return Unit.Value;
     }
 }

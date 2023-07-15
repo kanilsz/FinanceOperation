@@ -1,9 +1,8 @@
-﻿namespace FinanceOperation.Infrastructure
+﻿namespace FinanceOperation.Infrastructure;
+
+public record CosmosConfigs
 {
-    public record CosmosConfigs
-    {
-        public string? ConnectionString { get; init; }
-        public string? DatabaseName { get; init; }
-        public int Throughput { get; set; }
-    }
+    public string ConnectionString { get; init; }
+    public string DatabaseName { get; init; }
+    public int Throughput { get; set; }
 }

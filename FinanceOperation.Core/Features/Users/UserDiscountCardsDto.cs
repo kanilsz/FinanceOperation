@@ -1,6 +1,5 @@
-﻿namespace FinanceOperation.Core.Features.Users
+﻿namespace FinanceOperation.Core.Features.Users;
+
+public class UserDiscountCardsDto
 {
-    public class UserDiscountCardsDto
-    {
-    }
 }

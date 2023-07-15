@@ -1,72 +1,70 @@
-﻿using AutoMapper;
-using FinanceOperation.Core.Repositories;
+﻿using FinanceOperation.Core.Repositories;
 using MediatR;
 
-namespace FinanceOperation.Core.Features.Transactions.GetByUserId
+namespace FinanceOperation.Core.Features.Transactions.GetByUserId;
+
+public class GetTransactionsByUserIdQueryHandler : IRequestHandler<GetTransactionsByUserIdQuery, UserIncomeOutcome>
 {
-    public class GetTransactionsByUserIdQueryHandler : IRequestHandler<GetTransactionsByUserIdQuery, UserIncomeOutcome>
+    private readonly ITransactionRepository _repository;
+
+    public GetTransactionsByUserIdQueryHandler(ITransactionRepository repository)
     {
-        private readonly ITransactionRepository _repository;
+        _repository = repository;
+    }
 
-        public GetTransactionsByUserIdQueryHandler(ITransactionRepository repository)
+    public async Task<UserIncomeOutcome> Handle(GetTransactionsByUserIdQuery request, CancellationToken cancellationToken)
+    {
+        IList<Domain.Transactions.Transaction> transactions = await _repository.GetUserTranscations(tr => request.UserId == tr.UserId, cancellationToken);
+
+        IList<Statistic> incomes = new List<Statistic>();
+        IList<Statistic> outcomes = new List<Statistic>();
+
+        foreach (Domain.Transactions.Transaction transaction in transactions)
         {
-            _repository = repository;
-        }
+            string operation = transaction.Summary[0].ToString();
+            double sum = double.Parse(transaction.Summary[1..]);
 
-        public async Task<UserIncomeOutcome> Handle(GetTransactionsByUserIdQuery request, CancellationToken cancellationToken)
-        {
-            var transactions = await _repository.GetUserTranscations(tr => request.UserId == tr.UserId, cancellationToken);
-
-            IList<Statistic> incomes = new List<Statistic>();
-            IList<Statistic> outcomes = new List<Statistic>();
-
-            foreach (var transaction in transactions)
+            if (operation == "+")
             {
-                var operation = transaction.Summary[0].ToString();
-                var sum = double.Parse(transaction.Summary[1..]);
-
-                if (operation == "+")
+                if (incomes.Any(i => i.BankName == transaction.BankName))
                 {
-                    if (incomes.Any(i => i.BankName == transaction.BankName))
-                    {
-                        incomes.First(i=>i.BankName==transaction.BankName).Summary += sum;
-                    }
-                    else
-                    {
-                        incomes.Add(new Statistic()
-                        {
-                            BankName = transaction.BankName,
-                            Summary = sum
-                        });
-                    }
-
-                    continue;
+                    incomes.First(i => i.BankName == transaction.BankName).Summary += sum;
                 }
-                else if (transaction.Summary.StartsWith("-"))
+                else
                 {
-                    if (outcomes.Any(i => i.BankName == transaction.BankName))
+                    incomes.Add(new Statistic()
                     {
-                        outcomes.First(i => i.BankName == transaction.BankName).Summary += sum;
-                    }
-                    else
-                    {
-                        outcomes.Add(new Statistic()
-                        {
-                            BankName = transaction.BankName,
-                            Summary = sum
-                        });
-                    }
-                    
-                    continue;
+                        BankName = transaction.BankName,
+                        Summary = sum
+                    });
                 }
 
+                continue;
+            }
+            else if (transaction.Summary.StartsWith("-"))
+            {
+                if (outcomes.Any(i => i.BankName == transaction.BankName))
+                {
+                    outcomes.First(i => i.BankName == transaction.BankName).Summary += sum;
+                }
+                else
+                {
+                    outcomes.Add(new Statistic()
+                    {
+                        BankName = transaction.BankName,
+                        Summary = sum
+                    });
+                }
+
+                continue;
             }
 
-            return new UserIncomeOutcome
-            {
-                Incomes = incomes,
-                Outcomes = outcomes
-            };
         }
+
+        return new UserIncomeOutcome
+        {
+            Incomes = incomes,
+            Outcomes = outcomes
+        };
     }
 }

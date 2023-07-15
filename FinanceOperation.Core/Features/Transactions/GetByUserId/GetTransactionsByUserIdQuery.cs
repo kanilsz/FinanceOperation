@@ -1,9 +1,8 @@
 ﻿using MediatR;
 
-namespace FinanceOperation.Core.Features.Transactions.GetByUserId
+namespace FinanceOperation.Core.Features.Transactions.GetByUserId;
+
+public class GetTransactionsByUserIdQuery : IRequest<UserIncomeOutcome>
 {
-    public class GetTransactionsByUserIdQuery: IRequest<UserIncomeOutcome>
-    {
-        public string UserId { get; set; }
-    }
+    public string UserId { get; set; }
 }

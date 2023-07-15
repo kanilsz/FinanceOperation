@@ -1,27 +1,26 @@
 ﻿using FinanceOperation.Core.Repositories;
 using MediatR;
 
-namespace FinanceOperation.Core.Features.Users.DeleteCards
+namespace FinanceOperation.Core.Features.Users.DeleteBankCards;
+
+public class DeleteUserBankCardCommandHandler : IRequestHandler<DeleteUserBankCardCommand>
 {
-    public class DeleteUserBankCardCommandHandler : IRequestHandler<DeleteUserBankCardCommand>
+    private readonly IUserRepository _userRepository;
+
+    public DeleteUserBankCardCommandHandler(IUserRepository userRepository)
     {
-        private readonly IUserRepository _userRepository;
+        _userRepository = userRepository;
+    }
 
-        public DeleteUserBankCardCommandHandler(IUserRepository userRepository)
-        {
-            _userRepository = userRepository;
-        }
+    public async Task<Unit> Handle(DeleteUserBankCardCommand request, CancellationToken cancellationToken)
+    {
+        Domain.Users.UserInfo user = await _userRepository.GetUserInfo(request.UserId, cancellationToken);
 
-        public async Task<Unit> Handle(DeleteUserBankCardCommand request, CancellationToken cancellationToken)
-        {
-            var user = await _userRepository.GetUserInfo(request.UserId, cancellationToken);
+        Domain.Cards.BankCard bankCardToRemove = user.BankCards.First(c => c.CardNumber == request.CardNumber);
+        _ = user.BankCards.Remove(bankCardToRemove);
 
-            var bankCardToRemove = user.BankCards.First(c => c.CardNumber == request.CardNumber);
-            user.BankCards.Remove(bankCardToRemove);
+        await _userRepository.Update(user, cancellationToken);
 
-            await _userRepository.Update(user, cancellationToken);
-
-            return Unit.Value;
-        }
+        return Unit.Value;
     }
 }

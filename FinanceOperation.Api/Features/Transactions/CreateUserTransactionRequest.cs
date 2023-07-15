@@ -1,9 +1,8 @@
-﻿namespace FinanceOperation.Api.Features.Transactions
+﻿namespace FinanceOperation.Api.Features.Transactions;
+
+public class CreateUserTransactionRequest
 {
-    public class CreateUserTransactionRequest
-    {
-        public string BankName { get; set; }
-        public string UserId { get; set; }
-        public string Summary { get; set; }
-    }
+    public required string BankName { get; set; }
+    public required string UserId { get; set; }
+    public required string Summary { get; set; }
 }

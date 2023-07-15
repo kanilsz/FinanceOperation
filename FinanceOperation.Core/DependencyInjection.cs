@@ -2,16 +2,15 @@
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace FinanceOperation.Core
+namespace FinanceOperation.Core;
+
+public static class DependencyInjection
 {
-    public static class DependencyInjection
+    public static IServiceCollection AddCore(this IServiceCollection services)
     {
-        public static IServiceCollection AddCore(this IServiceCollection services)
-        {
-            services
-                .AddMediatR(typeof(DependencyInjection).Assembly)
-                .AddMappingProfiles();
-            return services;
-        }
+        _ = services
+            .AddMediatR(typeof(DependencyInjection).Assembly)
+            .AddMappingProfiles();
+        return services;
     }
 }
