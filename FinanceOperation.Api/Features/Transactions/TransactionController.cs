@@ -2,7 +2,6 @@
 using FinanceOperation.Core.Features.Transactions.Delete;
 using FinanceOperation.Core.Features.Transactions.GetByUserId;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceOperation.Api.Features.Transactions
@@ -18,7 +17,6 @@ namespace FinanceOperation.Api.Features.Transactions
         }
 
         [HttpGet("{userId}")]
-        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserIncomeOutcome))]
         public async Task<ActionResult> GetUserTransactions([FromRoute] string userId)
         {
@@ -29,7 +27,6 @@ namespace FinanceOperation.Api.Features.Transactions
         }
 
         [HttpDelete("{userId}")]
-        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> DeleteUserTransactions([FromRoute] string userId)
@@ -42,7 +39,6 @@ namespace FinanceOperation.Api.Features.Transactions
         }
 
         [HttpPost]
-        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
