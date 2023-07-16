@@ -2,29 +2,28 @@
 using FinanceOperation.Domain.Cards;
 using MediatR;
 
-namespace FinanceOperation.Core.Features.Users.AddDiscountCard
+namespace FinanceOperation.Core.Features.Users.AddDiscountCard;
+
+public class AddUserDiscountCardCommandHandler : IRequestHandler<AddUserDiscountCardCommand>
 {
-    public class AddUserDiscountCardCommandHandler : IRequestHandler<AddUserDiscountCardCommand>
+    private readonly IUserRepository _userRepository;
+
+    public AddUserDiscountCardCommandHandler(IUserRepository userRepository)
     {
-        private readonly IUserRepository _userRepository;
+        _userRepository = userRepository;
+    }
 
-        public AddUserDiscountCardCommandHandler(IUserRepository userRepository)
+    public async Task<Unit> Handle(AddUserDiscountCardCommand request, CancellationToken cancellationToken)
+    {
+        Domain.Users.UserInfo user = await _userRepository.GetUserInfo(request.UserId, cancellationToken);
+
+        user.DiscountCards.Add(new DiscountCard
         {
-            _userRepository = userRepository;
-        }
+            CardNumber = request.CardNumber,
+            Balance = request.Balance
+        });
 
-        public async Task<Unit> Handle(AddUserDiscountCardCommand request, CancellationToken cancellationToken)
-        {
-            var user = await _userRepository.GetUserInfo(request.UserId, cancellationToken);
-
-            user.DiscountCards.Add(new DiscountCard
-            {
-                CardNumber = request.CardNumber,
-                Balance = request.Balance
-            });
-
-            await _userRepository.Update(user, cancellationToken);
-            return Unit.Value;
-        }
+        await _userRepository.Update(user, cancellationToken);
+        return Unit.Value;
     }
 }

@@ -3,16 +3,15 @@ using FinanceOperation.Core.Features.BankCards;
 using FinanceOperation.Core.Features.DiscountCards;
 using FinanceOperation.Domain.Users;
 
-namespace FinanceOperation.Core.Features.Users
+namespace FinanceOperation.Core.Features.Users;
+
+public class UserInfoDto : IMapFrom<UserInfo>, IMapTo<UserInfo>
 {
-    public class UserInfoDto : IMapFrom<UserInfo>, IMapTo<UserInfo>
-    {
-        public string Id {get;set;}
-        public string FirstName { get; set; }
-        public string SecondName { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public IEnumerable<BankCardDto> BankCards { get; set; }
-        public IEnumerable<DiscountCardDto> DiscountCards { get; set; }
-    }
+    public string Id { get; set; }
+    public string FirstName { get; set; }
+    public string SecondName { get; set; }
+    public string Email { get; set; }
+    public string Password { get; set; }
+    public IEnumerable<BankCardDto> BankCards { get; set; }
+    public IEnumerable<DiscountCardDto> DiscountCards { get; set; }
 }

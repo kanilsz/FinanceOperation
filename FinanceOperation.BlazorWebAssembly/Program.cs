@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
-var builder = WebAssemblyHostBuilder.CreateDefault(args);
-var configuration = builder.Configuration;
+WebAssemblyHostBuilder builder = WebAssemblyHostBuilder.CreateDefault(args);
+WebAssemblyHostConfiguration configuration = builder.Configuration;
 
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");

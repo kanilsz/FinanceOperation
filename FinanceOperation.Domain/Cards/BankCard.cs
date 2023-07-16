@@ -1,12 +1,11 @@
 ﻿using Newtonsoft.Json;
 
-namespace FinanceOperation.Domain.Cards
+namespace FinanceOperation.Domain.Cards;
+
+public class BankCard
 {
-    public class BankCard
-    {
-        [JsonProperty(PropertyName = "id")]
-        public string? Id => CardNumber;
-        public string? CardNumber { get; set; }
-        public double Balance { get; set; }
-    }
+    [JsonProperty(PropertyName = "id")]
+    public string Id => CardNumber;
+    public string CardNumber { get; set; }
+    public double Balance { get; set; }
 }

@@ -2,29 +2,28 @@
 using FinanceOperation.Domain.Cards;
 using MediatR;
 
-namespace FinanceOperation.Core.Features.Users.AddBankCard
+namespace FinanceOperation.Core.Features.Users.AddBankCard;
+
+internal class AddUserBankCardCommandHandler : IRequestHandler<AddUserBankCardCommand>
 {
-    internal class AddUserBankCardCommandHandler : IRequestHandler<AddUserBankCardCommand>
+    private readonly IUserRepository _userRepository;
+
+    public AddUserBankCardCommandHandler(IUserRepository userRepository)
     {
-        private readonly IUserRepository _userRepository;
+        _userRepository = userRepository;
+    }
 
-        public AddUserBankCardCommandHandler(IUserRepository userRepository)
+    public async Task<Unit> Handle(AddUserBankCardCommand request, CancellationToken cancellationToken)
+    {
+        Domain.Users.UserInfo user = await _userRepository.GetUserInfo(request.UserId, cancellationToken);
+
+        user.BankCards.Add(new BankCard
         {
-            _userRepository = userRepository;
-        }
+            CardNumber = request.CardNumber,
+            Balance = request.Balance
+        });
 
-        public async Task<Unit> Handle(AddUserBankCardCommand request, CancellationToken cancellationToken)
-        {
-            var user = await _userRepository.GetUserInfo(request.UserId, cancellationToken);
-
-            user.BankCards.Add(new BankCard
-            {
-                CardNumber = request.CardNumber,
-                Balance = request.Balance
-            });
-
-            await _userRepository.Update(user, cancellationToken);
-            return Unit.Value;
-        }
+        await _userRepository.Update(user, cancellationToken);
+        return Unit.Value;
     }
 }

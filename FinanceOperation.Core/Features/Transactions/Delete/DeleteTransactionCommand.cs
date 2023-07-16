@@ -2,10 +2,9 @@
 using FinanceOperation.Domain.Transactions;
 using MediatR;
 
-namespace FinanceOperation.Core.Features.Transactions.Delete
+namespace FinanceOperation.Core.Features.Transactions.Delete;
+
+public class DeleteTransactionCommand : IRequest, IMapTo<Transaction>
 {
-    public class DeleteTransactionCommand : IRequest, IMapTo<Transaction>
-    {
-        public string UserId{ get; set; }
-    }
+    public string UserId { get; set; }
 }

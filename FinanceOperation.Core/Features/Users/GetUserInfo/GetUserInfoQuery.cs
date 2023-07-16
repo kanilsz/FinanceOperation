@@ -1,9 +1,8 @@
 ﻿using MediatR;
 
-namespace FinanceOperation.Core.Features.Users.GetUserInfo
+namespace FinanceOperation.Core.Features.Users.GetUserInfo;
+
+public class GetUserInfoQuery : IRequest<UserInfoDto>
 {
-    public class GetUserInfoQuery : IRequest<UserInfoDto>
-    {
-        public string UserId { get; set; }
-    }
+    public string UserId { get; set; }
 }

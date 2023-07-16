@@ -1,9 +1,8 @@
 ﻿using MediatR;
 
-namespace FinanceOperation.Core.Features.BankCards.Delete
+namespace FinanceOperation.Core.Features.BankCards.Delete;
+
+public class DeleteBankCardCommand : IRequest
 {
-    public class DeleteBankCardCommand : IRequest
-    {
-        public string? CardNumber { get; set; }
-    }
+    public string CardNumber { get; set; }
 }
