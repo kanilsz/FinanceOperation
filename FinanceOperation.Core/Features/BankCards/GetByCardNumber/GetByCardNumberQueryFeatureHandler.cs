@@ -18,7 +18,7 @@ public class GetByCardNumberQueryFeatureHandler : IRequestHandler<GetByCardNumbe
 
     public async Task<BankCardDto> Handle(GetByCardNumberQueryFeature request, CancellationToken cancellationToken)
     {
-        BankCard? bankCard = await _bankCardRepository.GetByCardNumber(request.CardNumber, cancellationToken);
+        BankCard bankCard = await _bankCardRepository.GetByCardNumber(request.CardNumber, cancellationToken);
         return _mapper.Map<BankCardDto>(bankCard);
     }
 }

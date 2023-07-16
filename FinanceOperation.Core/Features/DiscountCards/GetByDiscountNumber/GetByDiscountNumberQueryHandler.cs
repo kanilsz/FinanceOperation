@@ -17,7 +17,7 @@ public class GetByDiscountNumberQueryHandler : IRequestHandler<GetByDiscountNumb
 
     public async Task<DiscountCardDto> Handle(GetByDiscountNumberQuery request, CancellationToken cancellationToken)
     {
-        DiscountCard? discountCard = await _discountCardRepository.GetByDiscountNumber(request.CardNumber, cancellationToken);
+        DiscountCard discountCard = await _discountCardRepository.GetByDiscountNumber(request.CardNumber, cancellationToken);
         return _mapper.Map<DiscountCardDto>(discountCard);
     }
 }
