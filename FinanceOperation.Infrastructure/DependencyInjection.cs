@@ -12,10 +12,10 @@ public static class DependencyInjection
     {
         services.InitializeCosmosDb(configuration);
 
-        _ = services.AddTransient<IBankCardRepository, BankCardRepository>();
-        _ = services.AddTransient<IDiscountCardRepository, DiscountCardRepository>();
-        _ = services.AddTransient<IUserRepository, UserRepository>();
-        _ = services.AddTransient<ITransactionRepository, TransactionRepository>();
+        services.AddTransient<IBankCardRepository, BankCardRepository>()
+                .AddTransient<IDiscountCardRepository, DiscountCardRepository>()
+                .AddTransient<IUserRepository, UserRepository>()
+                .AddTransient<ITransactionRepository, TransactionRepository>();
 
         return services;
     }
@@ -23,7 +23,7 @@ public static class DependencyInjection
     private static void InitializeCosmosDb(this IServiceCollection services, IConfiguration configuration)
     {
         CosmosConfigs cosmosConfigs = configuration.GetSection("CosmosDb").Get<CosmosConfigs>();
-        _ = services.AddSingleton(cosmosConfigs);
+        services.AddSingleton(cosmosConfigs);
 
         CosmosClient client = new(cosmosConfigs.ConnectionString);
 
@@ -36,6 +36,6 @@ public static class DependencyInjection
         UserRepository.Initialize(database);
         TransactionRepository.Initialize(database);
 
-        _ = services.AddSingleton(client);
+        services.AddSingleton(client);
     }
 }

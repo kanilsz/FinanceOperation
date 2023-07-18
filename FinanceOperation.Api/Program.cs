@@ -43,8 +43,8 @@ builder.Services.AddCore();
 builder.Services.AddInfrastucture(configuration);
 if (authEnabled)
 {
-    _ = builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
-    _ = builder.Services.AddAuthorization(options =>
+    builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
+    builder.Services.AddAuthorization(options =>
     {
         options.FallbackPolicy = new AuthorizationPolicyBuilder()
         .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
@@ -58,8 +58,8 @@ WebApplication app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    _ = app.UseSwagger();
-    _ = app.UseSwaggerUI();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseCors(options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
@@ -68,8 +68,8 @@ app.UseHttpsRedirection();
 
 if (authEnabled)
 {
-    _ = app.UseAuthentication();
-    _ = app.UseAuthorization();
+    app.UseAuthentication();
+    app.UseAuthorization();
 }
 
 app.MapControllers();
