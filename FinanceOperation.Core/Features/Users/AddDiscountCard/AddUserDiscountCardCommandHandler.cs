@@ -1,5 +1,6 @@
 ﻿using FinanceOperation.Core.Repositories;
 using FinanceOperation.Domain.Cards;
+using FinanceOperation.Domain.Users;
 using MediatR;
 
 namespace FinanceOperation.Core.Features.Users.AddDiscountCard;
@@ -15,7 +16,7 @@ public class AddUserDiscountCardCommandHandler : IRequestHandler<AddUserDiscount
 
     public async Task<Unit> Handle(AddUserDiscountCardCommand request, CancellationToken cancellationToken)
     {
-        Domain.Users.UserInfo user = await _userRepository.GetUserInfo(request.UserId, cancellationToken);
+        UserIdentity user = await _userRepository.GetUserInfo(request.UserId, cancellationToken);
 
         user.DiscountCards.Add(new DiscountCard
         {

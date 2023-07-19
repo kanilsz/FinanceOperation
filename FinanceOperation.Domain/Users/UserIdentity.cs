@@ -1,23 +1,24 @@
 ﻿using FinanceOperation.Domain.Cards;
+using FinanceOperation.Domain.Propositions;
 using Newtonsoft.Json;
 
 namespace FinanceOperation.Domain.Users;
 
-public class UserInfo
+public class UserIdentity
 {
-    public UserInfo()
+    public UserIdentity()
     {
-        Id = Guid.NewGuid().ToString();
         BankCards = new List<BankCard>();
         DiscountCards = new List<DiscountCard>();
     }
 
-    [JsonProperty(PropertyName = "id")]
-    public string Id { get; private set; }
+    public int UserIdentityId { get; set; }
     public string FirstName { get; set; }
     public string SecondName { get; set; }
     public string Email { get; set; }
     public string Password { get; set; }
     public IList<BankCard> BankCards { get; set; }
     public IList<DiscountCard> DiscountCards { get; set; }
+    public IList<Proposition> Credits { get; set; }
+    public IList<Proposition> Deposits { get; set; }
 }

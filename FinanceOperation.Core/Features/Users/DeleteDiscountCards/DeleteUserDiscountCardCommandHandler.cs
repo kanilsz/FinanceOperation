@@ -1,4 +1,6 @@
 ﻿using FinanceOperation.Core.Repositories;
+using FinanceOperation.Domain.Cards;
+using FinanceOperation.Domain.Users;
 using MediatR;
 
 namespace FinanceOperation.Core.Features.Users.DeleteDiscountCards;
@@ -14,10 +16,10 @@ public class DeleteUserDiscountCardCommandHandler : IRequestHandler<DeleteUserDi
 
     public async Task<Unit> Handle(DeleteUserDiscountCardCommand request, CancellationToken cancellationToken)
     {
-        Domain.Users.UserInfo user = await _userRepository.GetUserInfo(request.UserId, cancellationToken);
+        UserIdentity user = await _userRepository.GetUserInfo(request.UserId, cancellationToken);
 
-        Domain.Cards.DiscountCard discountCardToRemove = user.DiscountCards.First(c => c.CardNumber == request.CardNumber);
-        _ = user.DiscountCards.Remove(discountCardToRemove);
+        DiscountCard discountCardToRemove = user.DiscountCards.First(c => c.CardNumber == request.CardNumber);
+        user.DiscountCards.Remove(discountCardToRemove);
 
         await _userRepository.Update(user, cancellationToken);
 

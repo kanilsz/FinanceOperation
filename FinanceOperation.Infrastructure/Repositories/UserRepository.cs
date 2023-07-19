@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using FinanceOperation.Core.Repositories;
 using FinanceOperation.Domain.Users;
+using FinanceOperation.Infrastructure.Configs;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Linq;
 
@@ -19,11 +20,11 @@ public class UserRepository : IUserRepository
         _container = cosmosClient.GetContainer(cosmosConfigs.DatabaseName, ContainerName);
     }
 
-    public async Task<UserInfo> GetUserInfo(string userId, CancellationToken cancellationToken = default)
+    public async Task<UserIdentity> GetUserInfo(string userId, CancellationToken cancellationToken = default)
     {
         try
         {
-            ItemResponse<UserInfo> response = await _container.ReadItemAsync<UserInfo>(userId, new(userId), _requestOptions, cancellationToken);
+            ItemResponse<UserIdentity> response = await _container.ReadItemAsync<UserIdentity>(userId, new(userId), _requestOptions, cancellationToken);
             return response.Resource;
         }
         catch (CosmosException cex) when (cex.StatusCode is HttpStatusCode.NotFound)
@@ -32,27 +33,27 @@ public class UserRepository : IUserRepository
         }
     }
 
-    public async Task Create(UserInfo user, CancellationToken cancellationToken = default)
+    public async Task Create(UserIdentity user, CancellationToken cancellationToken = default)
     {
-        _ = await _container.CreateItemAsync(user, new(user.Id), _requestOptions, cancellationToken);
+       // _ = await _container.CreateItemAsync(user, new(user.UserIdentityId), _requestOptions, cancellationToken);
     }
 
-    public async Task<IList<UserInfo>> GetUsersInfoList(CancellationToken cancellationToken = default)
+    public async Task<IList<UserIdentity>> GetUsersInfoList(CancellationToken cancellationToken = default)
     {
-        FeedResponse<UserInfo> response = await _container.GetItemLinqQueryable<UserInfo>()
+        FeedResponse<UserIdentity> response = await _container.GetItemLinqQueryable<UserIdentity>()
                                                     .ToFeedIterator()
                                                     .ReadNextAsync(cancellationToken);
         return response.ToList();
     }
 
-    public async Task Update(UserInfo user, CancellationToken cancellationToken = default)
+    public async Task Update(UserIdentity user, CancellationToken cancellationToken = default)
     {
-        _ = await _container.ReplaceItemAsync(user, user.Id, new(user.Id), _requestOptions, cancellationToken);
+       // _ = await _container.ReplaceItemAsync(user, user.Id, new(user.Id), _requestOptions, cancellationToken);
     }
 
     public async Task Delete(string userId, CancellationToken cancellationToken = default)
     {
-        _ = await _container.DeleteItemAsync<UserInfo>(userId, new(userId), _requestOptions, cancellationToken);
+       // _ = await _container.DeleteItemAsync<UserIdentity>(userId, new(userId), _requestOptions, cancellationToken);
     }
 
     internal static void Initialize(Database database)

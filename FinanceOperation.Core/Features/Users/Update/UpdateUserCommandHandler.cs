@@ -3,25 +3,26 @@ using FinanceOperation.Core.Repositories;
 using FinanceOperation.Domain.Users;
 using MediatR;
 
-namespace FinanceOperation.Core.Features.Users.Update;
-
-public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, Unit>
+namespace FinanceOperation.Core.Features.Users.Update
 {
-    private readonly IUserRepository _userRepository;
-    private readonly IMapper _mapper;
-
-    public UpdateUserCommandHandler(IUserRepository userRepository, IMapper mapper)
+    public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, Unit>
     {
-        _userRepository = userRepository;
-        _mapper = mapper;
-    }
+        private readonly IUserRepository _userRepository;
+        private readonly IMapper _mapper;
 
-    public async Task<Unit> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
-    {
-        UserInfo user = _mapper.Map<UserInfo>(request);
+        public UpdateUserCommandHandler(IUserRepository userRepository, IMapper mapper)
+        {
+            _userRepository = userRepository;
+            _mapper = mapper;
+        }
 
-        await _userRepository.Update(user, cancellationToken);
+        public async Task<Unit> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
+        {
+            UserIdentity user = _mapper.Map<UserIdentity>(request);
 
-        return Unit.Value;
+            await _userRepository.Update(user, cancellationToken);
+
+            return Unit.Value;
+        }
     }
 }

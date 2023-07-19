@@ -92,7 +92,7 @@ public class UserController : ControllerBase
 
     [HttpGet]
     [AllowAnonymous]
-    [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(UserInfoDto))]
+    [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(UserIdentityDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> GetUsersInfo()
     {
@@ -130,7 +130,7 @@ public class UserController : ControllerBase
 
     [HttpGet("{userId}")]
     [AllowAnonymous]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserInfoDto))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserIdentityDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> GetUserInfo([FromRoute] string userId)
     {

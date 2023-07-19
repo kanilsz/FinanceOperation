@@ -1,4 +1,4 @@
-﻿namespace FinanceOperation.Infrastructure;
+﻿namespace FinanceOperation.Infrastructure.Configs;
 
 public record CosmosConfigs
 {

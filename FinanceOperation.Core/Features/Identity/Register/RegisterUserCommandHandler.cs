@@ -6,18 +6,12 @@ using MediatR;
 
 namespace FinanceOperation.Core.Features.Identity.Register;
 
-public record RegisterUserCommand() : IRequest, IMapTo<UserInfo>
+public record RegisterUserCommand : IRequest, IMapTo<UserIdentity>
 {
     public string FirstName { get; set; }
     public string SecondName { get; set; }
     public string Email { get; set; }
-    public string Password { get; set; }
-
-    public void MapTo(Profile profile)
-    {
-        _ = profile
-        .CreateMap<RegisterUserCommand, UserInfo>();
-    }
+    public string Password { get; set; }    
 }
 
 public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, Unit>
@@ -33,7 +27,7 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, U
 
     public async Task<Unit> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {
-        UserInfo user = _mapper.Map<UserInfo>(request);
+        UserIdentity user = _mapper.Map<UserIdentity>(request);
 
         await _userRepository.Create(user, cancellationToken);
         return Unit.Value;

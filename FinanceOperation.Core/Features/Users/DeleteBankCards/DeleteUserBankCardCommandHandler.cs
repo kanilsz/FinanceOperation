@@ -1,4 +1,6 @@
 ﻿using FinanceOperation.Core.Repositories;
+using FinanceOperation.Domain.Cards;
+using FinanceOperation.Domain.Users;
 using MediatR;
 
 namespace FinanceOperation.Core.Features.Users.DeleteBankCards;
@@ -14,10 +16,10 @@ public class DeleteUserBankCardCommandHandler : IRequestHandler<DeleteUserBankCa
 
     public async Task<Unit> Handle(DeleteUserBankCardCommand request, CancellationToken cancellationToken)
     {
-        Domain.Users.UserInfo user = await _userRepository.GetUserInfo(request.UserId, cancellationToken);
+        UserIdentity user = await _userRepository.GetUserInfo(request.UserId, cancellationToken);
 
-        Domain.Cards.BankCard bankCardToRemove = user.BankCards.First(c => c.CardNumber == request.CardNumber);
-        _ = user.BankCards.Remove(bankCardToRemove);
+        BankCard bankCardToRemove = user.BankCards.First(c => c.CardNumber == request.CardNumber);
+        user.BankCards.Remove(bankCardToRemove);
 
         await _userRepository.Update(user, cancellationToken);
 
