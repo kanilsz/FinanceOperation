@@ -1,4 +1,4 @@
-﻿namespace FinanceOperation.Api.Features.Transactions;
+﻿namespace FinanceOperation.Api.Interactions.WebApi.Features.Transactions;
 
 public class CreateUserTransactionRequest
 {

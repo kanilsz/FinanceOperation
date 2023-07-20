@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FinanceOperation.Api.Features.Identities;
+namespace FinanceOperation.Api.Interactions.WebApi.Features.Identities;
 
 [Route("/v1/identities")]
 public class IdentityController : ControllerBase
@@ -34,7 +34,7 @@ public class IdentityController : ControllerBase
 }
 
 public record RegisterUserRequest(
-    [property: Required, EmailAddress] string Email, 
+    [property: Required, EmailAddress] string Email,
     [property: Required, DataType(DataType.Password)] string Password,
     [property: DataType(DataType.Password), Compare("Password")] string ConfirmPassword,
     string FirstName,

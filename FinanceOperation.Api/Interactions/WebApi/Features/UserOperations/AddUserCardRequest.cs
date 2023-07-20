@@ -1,4 +1,4 @@
-﻿namespace FinanceOperation.Api.Features.UserOperations;
+﻿namespace FinanceOperation.Api.Interactions.WebApi.Features.UserOperations;
 
 public class AddUserCardRequest
 {

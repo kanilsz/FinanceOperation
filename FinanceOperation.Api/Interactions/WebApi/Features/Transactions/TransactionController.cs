@@ -4,7 +4,7 @@ using FinanceOperation.Core.Features.Transactions.GetByUserId;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FinanceOperation.Api.Features.Transactions;
+namespace FinanceOperation.Api.Interactions.WebApi.Features.Transactions;
 
 [Route("v1/transactions")]
 public class TransactionController : ControllerBase

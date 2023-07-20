@@ -51,7 +51,7 @@ public static class DependencyInjection
     {
         MsSqlConfigs cosmosConfigs = configuration.GetSection("MsSql").Get<MsSqlConfigs>();
 
-        services.AddDbContext<AppDbContext>(
+        services.AddDbContext<ApplicationDbContext>(
             options => options.UseSqlServer(cosmosConfigs.ConnectionString));
 
         return services;

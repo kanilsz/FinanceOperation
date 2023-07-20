@@ -1,7 +1,7 @@
 ﻿using FinanceOperation.Core.Features.BankCards;
 using FinanceOperation.Core.Features.DiscountCards;
 
-namespace FinanceOperation.Api.Features.UserOperations;
+namespace FinanceOperation.Api.Interactions.WebApi.Features.UserOperations;
 
 public class CreateUserRequest
 {
