@@ -9,5 +9,19 @@ public class ApplicationDbContext : DbContext
     {
     }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<UserIdentity>()
+           .HasMany(e => e.Credits)
+           .WithOne()
+           .HasForeignKey(e=> e.UserIdentityId);
+
+        modelBuilder.Entity<UserIdentity>()
+           .HasMany(e => e.Deposits)
+           .WithOne()
+           .HasForeignKey(e => e.UserIdentityId);
+    }
+
     public DbSet<UserIdentity> Users { get; set; }
 }

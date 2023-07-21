@@ -22,10 +22,11 @@ namespace FinanceOperation.Core.Features.Users.GetUserCards
         {
             UserIdentity userInfos = await _userRepository.GetUserInfo(request.UserId, cancellationToken);
 
+            // TODO Fix logic
             return new CardsDto
             {
-                DiscountCards = _mapper.Map<IList<DiscountCardDto>>(userInfos.DiscountCards),
-                BankCards = _mapper.Map<IList<BankCardDto>>(userInfos.BankCards)
+                //DiscountCards = _mapper.Map<IList<DiscountCardDto>>(userInfos.DiscountCards),
+                //BankCards = _mapper.Map<IList<BankCardDto>>(userInfos.BankCards)
             };
         }
     }

@@ -18,8 +18,9 @@ public class DeleteUserBankCardCommandHandler : IRequestHandler<DeleteUserBankCa
     {
         UserIdentity user = await _userRepository.GetUserInfo(request.UserId, cancellationToken);
 
-        BankCard bankCardToRemove = user.BankCards.First(c => c.CardNumber == request.CardNumber);
-        user.BankCards.Remove(bankCardToRemove);
+        // TODO Fix logic
+        //BankCard bankCardToRemove = user.BankCards.First(c => c.CardNumber == request.CardNumber);
+        //user.BankCards.Remove(bankCardToRemove);
 
         await _userRepository.Update(user, cancellationToken);
 

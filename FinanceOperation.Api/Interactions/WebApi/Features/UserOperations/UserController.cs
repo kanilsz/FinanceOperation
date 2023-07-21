@@ -149,8 +149,6 @@ public class UserController : ControllerBase
     {
         return Created("/v1/user", await _mediator.Send(new CreateUserCommand
         {
-            BankCards = request.BankCards,
-            DiscountCards = request.DiscountCards,
             Email = request.Email,
             SecondName = request.SecondName,
             FirstName = request.FirstName

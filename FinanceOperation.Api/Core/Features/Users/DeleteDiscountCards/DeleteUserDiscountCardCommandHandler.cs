@@ -18,8 +18,9 @@ public class DeleteUserDiscountCardCommandHandler : IRequestHandler<DeleteUserDi
     {
         UserIdentity user = await _userRepository.GetUserInfo(request.UserId, cancellationToken);
 
-        DiscountCard discountCardToRemove = user.DiscountCards.First(c => c.CardNumber == request.CardNumber);
-        user.DiscountCards.Remove(discountCardToRemove);
+        // TODO Fix logic
+        //DiscountCard discountCardToRemove = user.DiscountCards.First(c => c.CardNumber == request.CardNumber);
+        //user.DiscountCards.Remove(discountCardToRemove);
 
         await _userRepository.Update(user, cancellationToken);
 

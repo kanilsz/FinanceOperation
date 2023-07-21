@@ -1,7 +1,10 @@
-﻿namespace FinanceOperation.Domain.Propositions;
-public class Proposition
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace FinanceOperation.Domain.Propositions;
+public class CreditProposition
 {
-    public int PropositionId { get; set; }
+    [Key]
+    public int CreditPropositionId { get; set; }
     public int UserIdentityId { get; set; }
     public string PropositionNumber { get; set; }
     public double Summary { get; set; }

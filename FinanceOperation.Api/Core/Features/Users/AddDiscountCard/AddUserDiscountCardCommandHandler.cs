@@ -18,11 +18,12 @@ public class AddUserDiscountCardCommandHandler : IRequestHandler<AddUserDiscount
     {
         UserIdentity user = await _userRepository.GetUserInfo(request.UserId, cancellationToken);
 
-        user.DiscountCards.Add(new DiscountCard
-        {
-            CardNumber = request.CardNumber,
-            Balance = request.Balance
-        });
+        // TODO Fix logic
+        //user.DiscountCards.Add(new DiscountCard
+        //{
+        //    CardNumber = request.CardNumber,
+        //    Balance = request.Balance
+        //});
 
         await _userRepository.Update(user, cancellationToken);
         return Unit.Value;
