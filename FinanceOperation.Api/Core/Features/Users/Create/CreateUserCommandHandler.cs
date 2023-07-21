@@ -25,7 +25,7 @@ namespace FinanceOperation.Core.Features.Users.Create
             //user.DiscountCards = _mapper.Map<IList<DiscountCard>>(request.DiscountCards);
             //user.BankCards = _mapper.Map<IList<BankCard>>(request.BankCards);
 
-            await _userRepository.Create(user, cancellationToken);
+            await _userRepository.Create(user);
 
             return Unit.Value;
         }

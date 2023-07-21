@@ -20,6 +20,7 @@ public class UserIdentity
     public string SecondName { get; set; }
     public string Email { get; set; }
     public string Password { get; set; }
+    public string PhoneNumber { get; set; }
     public IList<CreditProposition> Credits { get; set; }
     public IList<DepositProposition> Deposits { get; set; }
 }

@@ -29,7 +29,7 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, U
     {
         UserIdentity user = _mapper.Map<UserIdentity>(request);
 
-        await _userRepository.Create(user, cancellationToken);
+        await _userRepository.Create(user);
         return Unit.Value;
     }
 }

@@ -28,7 +28,7 @@ public class UserController : ControllerBase
     [HttpGet("{userId}/cards")]
     [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CardsDto))]
-    public async Task<ActionResult> GetUserCards([FromRoute] string userId)
+    public async Task<ActionResult> GetUserCards([FromRoute] int userId)
     {
         return Ok(await _mediator.Send(new GetUserCardsQuery
         {
@@ -39,7 +39,7 @@ public class UserController : ControllerBase
     [HttpDelete("{userId}/bankCards/{cardNumber}")]
     [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<ActionResult> DeleteUserBankCard([FromRoute] string userId, [FromRoute] string cardNumber)
+    public async Task<ActionResult> DeleteUserBankCard([FromRoute] int userId, [FromRoute] string cardNumber)
     {
         _ = await _mediator.Send(new DeleteUserBankCardCommand
         {
@@ -52,7 +52,7 @@ public class UserController : ControllerBase
     [HttpDelete("{userId}/discountCards/{cardNumber}")]
     [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<ActionResult> DeleteUserDiscountCard([FromRoute] string userId, [FromRoute] string cardNumber)
+    public async Task<ActionResult> DeleteUserDiscountCard([FromRoute] int userId, [FromRoute] string cardNumber)
     {
         _ = await _mediator.Send(new DeleteUserDiscountCardCommand
         {
@@ -65,7 +65,7 @@ public class UserController : ControllerBase
     [HttpPost("{userId}/bankCards")]
     [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<ActionResult> AddUserBankCard([FromRoute] string userId, [FromBody] AddUserCardRequest request)
+    public async Task<ActionResult> AddUserBankCard([FromRoute] int userId, [FromBody] AddUserCardRequest request)
     {
         _ = await _mediator.Send(new AddUserBankCardCommand
         {
@@ -79,7 +79,7 @@ public class UserController : ControllerBase
     [HttpPost("{userId}/discountCards")]
     [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<ActionResult> AddUserDiscountCard([FromRoute] string userId, [FromBody] AddUserCardRequest request)
+    public async Task<ActionResult> AddUserDiscountCard([FromRoute] int userId, [FromBody] AddUserCardRequest request)
     {
         _ = await _mediator.Send(new AddUserDiscountCardCommand
         {
@@ -132,7 +132,7 @@ public class UserController : ControllerBase
     [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserIdentityDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult> GetUserInfo([FromRoute] string userId)
+    public async Task<ActionResult> GetUserInfo([FromRoute] int userId)
     {
         return Ok(await _mediator.Send(new GetUserInfoQuery
         {

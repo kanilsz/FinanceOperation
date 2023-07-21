@@ -39,7 +39,6 @@ public static class DependencyInjection
 
         BankCardRepository.Initialize(database);
         DiscountCardRepository.Initialize(database);
-        UserRepository.Initialize(database);
         TransactionRepository.Initialize(database);
 
         services.AddSingleton(client);

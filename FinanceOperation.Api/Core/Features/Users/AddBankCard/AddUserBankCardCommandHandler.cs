@@ -25,7 +25,7 @@ internal class AddUserBankCardCommandHandler : IRequestHandler<AddUserBankCardCo
         //    Balance = request.Balance
         //});
 
-        await _userRepository.Update(user, cancellationToken);
+        await _userRepository.Update(user);
         return Unit.Value;
     }
 }

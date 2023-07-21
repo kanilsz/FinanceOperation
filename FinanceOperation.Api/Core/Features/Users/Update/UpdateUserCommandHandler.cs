@@ -20,7 +20,7 @@ namespace FinanceOperation.Core.Features.Users.Update
         {
             UserIdentity user = _mapper.Map<UserIdentity>(request);
 
-            await _userRepository.Update(user, cancellationToken);
+            await _userRepository.Update(user);
 
             return Unit.Value;
         }

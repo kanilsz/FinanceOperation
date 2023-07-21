@@ -22,7 +22,7 @@ public class DeleteUserDiscountCardCommandHandler : IRequestHandler<DeleteUserDi
         //DiscountCard discountCardToRemove = user.DiscountCards.First(c => c.CardNumber == request.CardNumber);
         //user.DiscountCards.Remove(discountCardToRemove);
 
-        await _userRepository.Update(user, cancellationToken);
+        await _userRepository.Update(user);
 
         return Unit.Value;
     }

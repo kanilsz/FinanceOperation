@@ -22,7 +22,7 @@ public class DeleteUserBankCardCommandHandler : IRequestHandler<DeleteUserBankCa
         //BankCard bankCardToRemove = user.BankCards.First(c => c.CardNumber == request.CardNumber);
         //user.BankCards.Remove(bankCardToRemove);
 
-        await _userRepository.Update(user, cancellationToken);
+        await _userRepository.Update(user);
 
         return Unit.Value;
     }

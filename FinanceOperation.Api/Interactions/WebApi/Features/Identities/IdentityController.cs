@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using FinanceOperation.Core.Features.Identity.Register;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -33,9 +34,20 @@ public class IdentityController : ControllerBase
     }
 }
 
-public record RegisterUserRequest(
-    [property: Required, EmailAddress] string Email,
-    [property: Required, DataType(DataType.Password)] string Password,
-    [property: DataType(DataType.Password), Compare("Password")] string ConfirmPassword,
-    string FirstName,
-    string SecondName);
+public record RegisterUserRequest()
+{
+ 
+    [Required, EmailAddress]
+    public string Email { get; set; }
+
+    [Required, DataType(DataType.Password)]
+    public string Password { get; set; }
+
+    [Required, DataType(DataType.Password), Compare("Password")]
+    public string ConfirmPassword { get; set; }
+
+    public string FirstName { get; set; }
+
+    public string SecondName { get; set; }
+    public string PhoneNumber { get; set; }
+}
