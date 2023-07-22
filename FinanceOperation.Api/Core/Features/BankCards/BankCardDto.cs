@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using AutoMapper.Extensions.MappingProfile;
-using FinanceOperation.Domain.Cards;
+using FinanceOperation.Api.Domain.Cards;
 
-namespace FinanceOperation.Core.Features.BankCards;
+namespace FinanceOperation.Api.Core.Features.BankCards;
 
 public class BankCardDto : IMapFrom<BankCard>, IMapTo<BankCard>
 {

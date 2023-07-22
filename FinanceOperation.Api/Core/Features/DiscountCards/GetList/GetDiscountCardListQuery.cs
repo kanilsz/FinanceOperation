@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace FinanceOperation.Core.Features.DiscountCards.GetList;
+namespace FinanceOperation.Api.Core.Features.DiscountCards.GetList;
 
 public class GetDiscountCardListQuery : IRequest<IEnumerable<DiscountCardDto>>
 {

@@ -1,7 +1,7 @@
 ﻿using AutoMapper.Extensions.MappingProfile;
-using FinanceOperation.Domain.Cards;
+using FinanceOperation.Api.Domain.Cards;
 
-namespace FinanceOperation.Core.Features.DiscountCards;
+namespace FinanceOperation.Api.Core.Features.DiscountCards;
 
 public class DiscountCardDto : IMapFrom<DiscountCard>, IMapTo<DiscountCard>
 {

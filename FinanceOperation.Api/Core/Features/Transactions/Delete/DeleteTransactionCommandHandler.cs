@@ -1,7 +1,7 @@
-﻿using FinanceOperation.Core.Repositories;
+﻿using FinanceOperation.Api.Core.Repositories;
 using MediatR;
 
-namespace FinanceOperation.Core.Features.Transactions.Delete;
+namespace FinanceOperation.Api.Core.Features.Transactions.Delete;
 
 internal class DeleteTransactionCommandHandler : IRequestHandler<DeleteTransactionCommand>
 {

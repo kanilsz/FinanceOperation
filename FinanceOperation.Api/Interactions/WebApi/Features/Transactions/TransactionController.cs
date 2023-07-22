@@ -1,6 +1,6 @@
-﻿using FinanceOperation.Core.Features.Transactions.Create;
-using FinanceOperation.Core.Features.Transactions.Delete;
-using FinanceOperation.Core.Features.Transactions.GetByUserId;
+﻿using FinanceOperation.Api.Core.Features.Transactions.Create;
+using FinanceOperation.Api.Core.Features.Transactions.Delete;
+using FinanceOperation.Api.Core.Features.Transactions.GetByUserId;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,8 +1,8 @@
 ﻿using AutoMapper.Extensions.MappingProfile;
-using FinanceOperation.Domain.Transactions;
+using FinanceOperation.Api.Domain.Transactions;
 using MediatR;
 
-namespace FinanceOperation.Core.Features.Transactions.Delete;
+namespace FinanceOperation.Api.Core.Features.Transactions.Delete;
 
 public class DeleteTransactionCommand : IRequest, IMapTo<Transaction>
 {

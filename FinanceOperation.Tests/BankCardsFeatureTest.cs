@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.Extensions.MappingProfile;
-using FinanceOperation.Core.Features.BankCards.Create;
-using FinanceOperation.Core.Repositories;
-using FinanceOperation.Domain.Cards;
+using FinanceOperation.Api.Core.Features.BankCards.Create;
+using FinanceOperation.Api.Core.Repositories;
+using FinanceOperation.Api.Domain.Cards;
 using MediatR;
 using Moq;
 using Xunit;

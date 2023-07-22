@@ -1,7 +1,7 @@
-﻿using FinanceOperation.Core.Repositories;
+﻿using FinanceOperation.Api.Core.Repositories;
 using MediatR;
 
-namespace FinanceOperation.Core.Features.DiscountCards.Delete;
+namespace FinanceOperation.Api.Core.Features.DiscountCards.Delete;
 
 public class DeleteDiscountCardCommandHandler : IRequestHandler<DeleteDiscountCardCommand>
 {

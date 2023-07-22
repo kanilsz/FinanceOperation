@@ -1,8 +1,8 @@
 ﻿
 using System.Linq.Expressions;
-using FinanceOperation.Domain.Transactions;
+using FinanceOperation.Api.Domain.Transactions;
 
-namespace FinanceOperation.Core.Repositories;
+namespace FinanceOperation.Api.Core.Repositories;
 
 public interface ITransactionRepository
 {

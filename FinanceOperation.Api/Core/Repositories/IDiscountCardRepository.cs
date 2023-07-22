@@ -1,6 +1,6 @@
-﻿using FinanceOperation.Domain.Cards;
+﻿using FinanceOperation.Api.Domain.Cards;
 
-namespace FinanceOperation.Core.Repositories;
+namespace FinanceOperation.Api.Core.Repositories;
 
 public interface IDiscountCardRepository
 {

@@ -1,24 +1,20 @@
-﻿using System.Configuration;
-using System;
-using FinanceOperation.Core.Repositories;
-using FinanceOperation.Infrastructure.Repositories;
+﻿using FinanceOperation.Api.Core.Repositories;
+using FinanceOperation.Api.Infrastructure.Configs;
+using FinanceOperation.Api.Infrastructure.DbContexts;
+using FinanceOperation.Api.Infrastructure.Repositories;
 using Microsoft.Azure.Cosmos;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using FinanceOperation.Infrastructure.DbContexts;
-using FinanceOperation.Infrastructure.Configs;
 
-namespace FinanceOperation.Infrastructure;
+namespace FinanceOperation.Api.Infrastructure;
 
 public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastucture(this IServiceCollection services, IConfiguration configuration)
     {
-        services.InitializeCosmosDb(configuration)
+        _ = services.InitializeCosmosDb(configuration)
                 .InitializeMsSqlDb(configuration);
 
-        services.AddTransient<IBankCardRepository, BankCardRepository>()
+        _ = services.AddTransient<IBankCardRepository, BankCardRepository>()
                 .AddTransient<IDiscountCardRepository, DiscountCardRepository>()
                 .AddTransient<IUserRepository, UserRepository>()
                 .AddTransient<ITransactionRepository, TransactionRepository>();
@@ -29,7 +25,7 @@ public static class DependencyInjection
     private static IServiceCollection InitializeCosmosDb(this IServiceCollection services, IConfiguration configuration)
     {
         CosmosConfigs cosmosConfigs = configuration.GetSection("CosmosDb").Get<CosmosConfigs>();
-        services.AddSingleton(cosmosConfigs);
+        _ = services.AddSingleton(cosmosConfigs);
 
         CosmosClient client = new(cosmosConfigs.ConnectionString);
 
@@ -41,7 +37,7 @@ public static class DependencyInjection
         DiscountCardRepository.Initialize(database);
         TransactionRepository.Initialize(database);
 
-        services.AddSingleton(client);
+        _ = services.AddSingleton(client);
 
         return services;
     }
@@ -50,7 +46,7 @@ public static class DependencyInjection
     {
         MsSqlConfigs cosmosConfigs = configuration.GetSection("MsSql").Get<MsSqlConfigs>();
 
-        services.AddDbContext<ApplicationDbContext>(
+        _ = services.AddDbContext<ApplicationDbContext>(
             options => options.UseSqlServer(cosmosConfigs.ConnectionString));
 
         return services;

@@ -1,5 +1,5 @@
-﻿using FinanceOperation.Core;
-using FinanceOperation.Infrastructure;
+﻿using FinanceOperation.Api.Core;
+using FinanceOperation.Api.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.OpenApi.Models;
@@ -43,8 +43,8 @@ builder.Services.AddCore();
 builder.Services.AddInfrastucture(configuration);
 if (authEnabled)
 {
-    builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
-    builder.Services.AddAuthorization(options =>
+    _ = builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
+    _ = builder.Services.AddAuthorization(options =>
     {
         options.FallbackPolicy = new AuthorizationPolicyBuilder()
         .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
@@ -58,8 +58,8 @@ WebApplication app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    _ = app.UseSwagger();
+    _ = app.UseSwaggerUI();
 }
 
 app.UseCors(options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
@@ -68,8 +68,8 @@ app.UseHttpsRedirection();
 
 if (authEnabled)
 {
-    app.UseAuthentication();
-    app.UseAuthorization();
+    _ = app.UseAuthentication();
+    _ = app.UseAuthorization();
 }
 
 app.MapControllers();

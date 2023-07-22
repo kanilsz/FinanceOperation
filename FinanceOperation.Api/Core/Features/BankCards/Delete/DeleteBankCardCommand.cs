@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace FinanceOperation.Core.Features.BankCards.Delete;
+namespace FinanceOperation.Api.Core.Features.BankCards.Delete;
 
 public class DeleteBankCardCommand : IRequest
 {

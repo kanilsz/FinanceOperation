@@ -1,14 +1,13 @@
 ﻿using AutoMapper.Extensions.MappingProfile;
 using MediatR;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace FinanceOperation.Core;
+namespace FinanceOperation.Api.Core;
 
 public static class DependencyInjection
 {
     public static IServiceCollection AddCore(this IServiceCollection services)
     {
-        services
+        _ = services
             .AddMediatR(typeof(DependencyInjection).Assembly)
             .AddMappingProfiles();
         return services;

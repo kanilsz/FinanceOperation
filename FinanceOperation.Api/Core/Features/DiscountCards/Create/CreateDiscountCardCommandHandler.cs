@@ -1,8 +1,8 @@
-﻿using FinanceOperation.Core.Repositories;
-using FinanceOperation.Domain.Cards;
+﻿using FinanceOperation.Api.Core.Repositories;
+using FinanceOperation.Api.Domain.Cards;
 using MediatR;
 
-namespace FinanceOperation.Core.Features.DiscountCards.Create;
+namespace FinanceOperation.Api.Core.Features.DiscountCards.Create;
 
 public class CreateDiscountCardCommandHandler : IRequestHandler<CreateDiscountCardCommand, Unit>
 {

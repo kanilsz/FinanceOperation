@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace FinanceOperation.Domain.Transactions;
+namespace FinanceOperation.Api.Domain.Transactions;
 
 public class Transaction
 {

@@ -1,4 +1,4 @@
-﻿namespace FinanceOperation.Core.Features.Transactions.GetByUserId;
+﻿namespace FinanceOperation.Api.Core.Features.Transactions.GetByUserId;
 
 public class UserIncomeOutcome
 {

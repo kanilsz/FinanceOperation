@@ -1,8 +1,8 @@
 ﻿using AutoMapper.Extensions.MappingProfile;
-using FinanceOperation.Domain.Cards;
+using FinanceOperation.Api.Domain.Cards;
 using MediatR;
 
-namespace FinanceOperation.Core.Features.BankCards.Create;
+namespace FinanceOperation.Api.Core.Features.BankCards.Create;
 
 public class CreateBankCardCommand : IRequest, IMapTo<BankCard>
 {

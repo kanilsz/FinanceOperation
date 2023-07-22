@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace FinanceOperation.Core.Features.BankCards.GetByCardNumber;
+namespace FinanceOperation.Api.Core.Features.BankCards.GetByCardNumber;
 
 public class GetByCardNumberQueryFeature : IRequest<BankCardDto>
 {

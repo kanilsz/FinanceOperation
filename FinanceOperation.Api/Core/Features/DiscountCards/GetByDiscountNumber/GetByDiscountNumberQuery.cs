@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace FinanceOperation.Core.Features.DiscountCards.GetByDiscountNumber;
+namespace FinanceOperation.Api.Core.Features.DiscountCards.GetByDiscountNumber;
 
 public class GetByDiscountNumberQuery : IRequest<DiscountCardDto>
 {

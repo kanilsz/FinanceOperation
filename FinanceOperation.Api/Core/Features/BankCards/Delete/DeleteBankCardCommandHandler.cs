@@ -1,7 +1,7 @@
-﻿using FinanceOperation.Core.Repositories;
+﻿using FinanceOperation.Api.Core.Repositories;
 using MediatR;
 
-namespace FinanceOperation.Core.Features.BankCards.Delete;
+namespace FinanceOperation.Api.Core.Features.BankCards.Delete;
 
 public class DeleteBankCardCommandHandler : IRequestHandler<DeleteBankCardCommand>
 {

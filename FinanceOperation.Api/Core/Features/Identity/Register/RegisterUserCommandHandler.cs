@@ -1,17 +1,18 @@
 ﻿using AutoMapper;
 using AutoMapper.Extensions.MappingProfile;
-using FinanceOperation.Core.Repositories;
-using FinanceOperation.Domain.Users;
+using FinanceOperation.Api.Core.Repositories;
+using FinanceOperation.Api.Domain.Users;
 using MediatR;
 
-namespace FinanceOperation.Core.Features.Identity.Register;
+namespace FinanceOperation.Api.Core.Features.Identity.Register;
 
 public record RegisterUserCommand : IRequest, IMapTo<UserIdentity>
 {
     public string FirstName { get; set; }
     public string SecondName { get; set; }
     public string Email { get; set; }
-    public string Password { get; set; }    
+    public string Password { get; set; }
+    public string PhoneNumber { get; set; }
 }
 
 public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, Unit>

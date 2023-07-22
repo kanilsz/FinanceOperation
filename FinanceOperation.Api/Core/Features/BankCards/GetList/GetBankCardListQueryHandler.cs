@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using FinanceOperation.Core.Repositories;
-using FinanceOperation.Domain.Cards;
+using FinanceOperation.Api.Core.Repositories;
+using FinanceOperation.Api.Domain.Cards;
 using MediatR;
 
-namespace FinanceOperation.Core.Features.BankCards.GetList;
+namespace FinanceOperation.Api.Core.Features.BankCards.GetList;
 
 public class GetBankCardListQueryHandler : IRequestHandler<GetBankCardListQuery, IEnumerable<BankCardDto>>
 {

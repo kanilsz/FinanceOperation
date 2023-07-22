@@ -1,7 +1,7 @@
 ﻿using AutoMapper.Extensions.MappingProfile;
-using FinanceOperation.Domain.Transactions;
+using FinanceOperation.Api.Domain.Transactions;
 
-namespace FinanceOperation.Core.Features.Transactions;
+namespace FinanceOperation.Api.Core.Features.Transactions;
 
 internal class TransactionDto : IMapTo<Transaction>, IMapFrom<Transaction>
 {

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace FinanceOperation.Domain.Cards;
+namespace FinanceOperation.Api.Domain.Cards;
 
 public class BankCard
 {

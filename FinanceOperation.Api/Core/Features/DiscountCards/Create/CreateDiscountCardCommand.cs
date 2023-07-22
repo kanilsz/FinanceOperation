@@ -1,8 +1,8 @@
 ﻿using AutoMapper.Extensions.MappingProfile;
-using FinanceOperation.Domain.Cards;
+using FinanceOperation.Api.Domain.Cards;
 using MediatR;
 
-namespace FinanceOperation.Core.Features.DiscountCards.Create;
+namespace FinanceOperation.Api.Core.Features.DiscountCards.Create;
 
 public class CreateDiscountCardCommand : IRequest, IMapTo<DiscountCard>
 {

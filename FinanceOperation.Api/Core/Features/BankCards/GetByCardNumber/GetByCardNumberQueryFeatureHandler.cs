@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using FinanceOperation.Core.Repositories;
-using FinanceOperation.Domain.Cards;
+using FinanceOperation.Api.Core.Repositories;
+using FinanceOperation.Api.Domain.Cards;
 using MediatR;
 
-namespace FinanceOperation.Core.Features.BankCards.GetByCardNumber;
+namespace FinanceOperation.Api.Core.Features.BankCards.GetByCardNumber;
 
 public class GetByCardNumberQueryFeatureHandler : IRequestHandler<GetByCardNumberQueryFeature, BankCardDto>
 {

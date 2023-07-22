@@ -1,8 +1,8 @@
-﻿using FinanceOperation.Core.Repositories;
-using FinanceOperation.Domain.Cards;
+﻿using FinanceOperation.Api.Core.Repositories;
+using FinanceOperation.Api.Domain.Cards;
 using MediatR;
 
-namespace FinanceOperation.Core.Features.BankCards.Create;
+namespace FinanceOperation.Api.Core.Features.BankCards.Create;
 
 public class CreateBankCardCommandHandler : IRequestHandler<CreateBankCardCommand, Unit>
 {

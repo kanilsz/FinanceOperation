@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using FinanceOperation.Core.Repositories;
-using FinanceOperation.Domain.Transactions;
+using FinanceOperation.Api.Core.Repositories;
+using FinanceOperation.Api.Domain.Transactions;
 using MediatR;
 
-namespace FinanceOperation.Core.Features.Transactions.Create;
+namespace FinanceOperation.Api.Core.Features.Transactions.Create;
 
 internal class CreateTransactionCommandHandler : IRequestHandler<CreateTransactionCommand>
 {

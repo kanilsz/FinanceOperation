@@ -1,7 +1,8 @@
-﻿using FinanceOperation.Core.Repositories;
+﻿using FinanceOperation.Api.Core.Repositories;
+using FinanceOperation.Api.Domain.Transactions;
 using MediatR;
 
-namespace FinanceOperation.Core.Features.Transactions.GetByUserId;
+namespace FinanceOperation.Api.Core.Features.Transactions.GetByUserId;
 
 public class GetTransactionsByUserIdQueryHandler : IRequestHandler<GetTransactionsByUserIdQuery, UserIncomeOutcome>
 {
@@ -14,12 +15,12 @@ public class GetTransactionsByUserIdQueryHandler : IRequestHandler<GetTransactio
 
     public async Task<UserIncomeOutcome> Handle(GetTransactionsByUserIdQuery request, CancellationToken cancellationToken)
     {
-        IList<Domain.Transactions.Transaction> transactions = await _repository.GetUserTranscations(tr => request.UserId == tr.UserId, cancellationToken);
+        IList<Transaction> transactions = await _repository.GetUserTranscations(tr => request.UserId == tr.UserId, cancellationToken);
 
         IList<Statistic> incomes = new List<Statistic>();
         IList<Statistic> outcomes = new List<Statistic>();
 
-        foreach (Domain.Transactions.Transaction transaction in transactions)
+        foreach (Transaction transaction in transactions)
         {
             string operation = transaction.Summary[0].ToString();
             double sum = double.Parse(transaction.Summary[1..]);
