@@ -13,11 +13,18 @@ public class UserRepository : IUserRepository
         _context = context;
     }
 
-    public async Task<UserIdentity> GetUser(int userId, CancellationToken cancellationToken = default)
+    public async Task<UserIdentity> GetUser(int userId)
     {
-        UserIdentity user = await _context.Users.FindAsync(userId, cancellationToken);
+        UserIdentity user;
+        try
+        {
+            user = await _context.Users.FindAsync(userId);
+        }
+        catch
+        {
+            return default;
+        }
         return user;
-        //}
     }
 
     public async Task Create(UserIdentity user)

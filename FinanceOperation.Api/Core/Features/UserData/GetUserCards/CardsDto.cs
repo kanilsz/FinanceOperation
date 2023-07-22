@@ -1,5 +1,4 @@
-﻿using FinanceOperation.Api.Core.Features.BankCards;
-using FinanceOperation.Api.Core.Features.DiscountCards;
+﻿using FinanceOperation.Api.Core.Features.UserData;
 
 namespace FinanceOperation.Api.Core.Features.Users.GetUserCards;
 

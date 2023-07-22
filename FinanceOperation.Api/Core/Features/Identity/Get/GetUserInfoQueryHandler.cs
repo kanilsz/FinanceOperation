@@ -18,7 +18,7 @@ public class GetUserInfoQueryHandler : IRequestHandler<GetUserInfoQuery, UserIde
 
     public async Task<UserIdentityDto> Handle(GetUserInfoQuery request, CancellationToken cancellationToken)
     {
-        UserIdentity userInfos = await _userRepository.GetUser(request.UserId, cancellationToken);
+        UserIdentity userInfos = await _userRepository.GetUser(request.UserId);
         return _mapper.Map<UserIdentityDto>(userInfos);
     }
 }

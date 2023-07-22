@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using FinanceOperation.Api.Core.Features.UserData;
 using FinanceOperation.Api.Core.Repositories;
+using FinanceOperation.Api.Domain.Users;
 using MediatR;
 
 namespace FinanceOperation.Api.Core.Features.Users.GetUserCards;
@@ -7,23 +9,29 @@ namespace FinanceOperation.Api.Core.Features.Users.GetUserCards;
 public class GetUserCardsQueryHandler : IRequestHandler<GetUserCardsQuery, CardsDto>
 {
     private readonly IUserRepository _userRepository;
+    private readonly IBankCardRepository _bankCardRepository;
+    private readonly IDiscountCardRepository _discountCardRepository;
     private readonly IMapper _mapper;
 
-    public GetUserCardsQueryHandler(IUserRepository userRepository, IMapper mapper)
+    public GetUserCardsQueryHandler(IUserRepository userRepository, IMapper mapper, IDiscountCardRepository discountCardRepository, IBankCardRepository bankCardRepository)
     {
         _userRepository = userRepository;
         _mapper = mapper;
+        _discountCardRepository = discountCardRepository;
+        _bankCardRepository = bankCardRepository;
     }
 
     public async Task<CardsDto> Handle(GetUserCardsQuery request, CancellationToken cancellationToken)
     {
-        _ = await _userRepository.GetUser(request.UserId, cancellationToken);
+        UserIdentity user = await _userRepository.GetUser(request.UserId)
+            ?? throw new Exception($"UserId {request.UserId} is not found");
 
-        // TODO Fix logic
+        var userDiscountCards = await _discountCardRepository.GetUserDiscountCards(user.UserId, cancellationToken);
+        var userBankCards = await _bankCardRepository.GetUserBankCards(user.UserId, cancellationToken);
         return new CardsDto
         {
-            //DiscountCards = _mapper.Map<IList<DiscountCardDto>>(userInfos.DiscountCards),
-            //BankCards = _mapper.Map<IList<BankCardDto>>(userInfos.BankCards)
+            DiscountCards = _mapper.Map<IList<DiscountCardDto>>(userDiscountCards),
+            BankCards = _mapper.Map<IList<BankCardDto>>(userBankCards)
         };
     }
 }

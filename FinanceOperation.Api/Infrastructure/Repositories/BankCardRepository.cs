@@ -20,11 +20,11 @@ public class BankCardRepository : IBankCardRepository
         _container = cosmosClient.GetContainer(cosmosConfigs.DatabaseName, ContainerName);
     }
 
-    public async Task<BankCard> GetByCardNumber(string cardNumber, CancellationToken cancellationToken = default)
+    public async Task<BankCard> GetByCardNumber(string cardNumber, int userId, CancellationToken cancellationToken = default)
     {
         try
         {
-            ItemResponse<BankCard> response = await _container.ReadItemAsync<BankCard>(cardNumber, new(cardNumber), _requestOptions, cancellationToken);
+            ItemResponse<BankCard> response = await _container.ReadItemAsync<BankCard>(cardNumber, new(userId), _requestOptions, cancellationToken);
             return response.Resource;
         }
         catch (CosmosException cex) when (cex.StatusCode == HttpStatusCode.NotFound)
@@ -33,29 +33,33 @@ public class BankCardRepository : IBankCardRepository
         }
     }
 
-    public async Task<IList<BankCard>> GetBankCardsList(CancellationToken cancellationToken = default)
+    public async Task<IList<BankCard>> GetUserBankCards(int userId, CancellationToken cancellationToken = default)
     {
-        FeedResponse<BankCard> response = await _container.GetItemLinqQueryable<BankCard>().ToFeedIterator().ReadNextAsync(cancellationToken);
+        FeedResponse<BankCard> response = await _container.GetItemLinqQueryable<BankCard>()
+            .Where(card=> card.UserId == userId)
+            .ToFeedIterator()
+            .ReadNextAsync(cancellationToken);
+
         return response.ToList();
     }
 
-    public async Task Create(BankCard bankCard, CancellationToken cancellationToken = default)
+    public async Task Create(BankCard bankCard)
     {
-        _ = await _container.CreateItemAsync(bankCard, new(bankCard.Id), _requestOptions, cancellationToken);
+        _ = await _container.CreateItemAsync(bankCard, new(bankCard.UserId), _requestOptions);
     }
 
-    public async Task Remove(string cardNumber, CancellationToken cancellationToken = default)
+    public async Task Remove(string cardNumber, int userId)
     {
-        _ = await _container.DeleteItemAsync<BankCard>(cardNumber, new(cardNumber), _requestOptions, cancellationToken);
+        _ = await _container.DeleteItemAsync<BankCard>(cardNumber, new(userId), _requestOptions);
     }
 
     public static void Initialize(Database database)
     {
         try
         {
-            _ = database.CreateContainerIfNotExistsAsync(ContainerName, "/id")
-                .GetAwaiter()
-                .GetResult();
+            database.CreateContainerIfNotExistsAsync(ContainerName, $"/{nameof(BankCard.UserId)}")
+               .GetAwaiter()
+               .GetResult();
         }
         catch
         {
