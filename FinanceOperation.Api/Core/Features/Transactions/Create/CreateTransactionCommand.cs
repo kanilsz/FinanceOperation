@@ -5,7 +5,7 @@ using MediatR;
 
 namespace FinanceOperation.Api.Core.Features.Transactions.Create;
 
-public class CreateTransactionCommand : IRequest, IMapTo<Transaction>, IMapFrom<Transaction>
+public class CreateTransactionCommand : IRequest<Unit>, IMapTo<Transaction>, IMapFrom<Transaction>
 {
     public string BankName { get; set; }
     public string UserId { get; set; }

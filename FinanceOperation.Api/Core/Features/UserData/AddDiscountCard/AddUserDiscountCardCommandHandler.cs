@@ -17,7 +17,7 @@ public class AddUserDiscountCardCommandHandler : IRequestHandler<AddUserDiscount
         _discountCardRepository = discountCardRepository;
     }
 
-    public async Task<Unit> Handle(AddUserDiscountCardCommand request, CancellationToken cancellationToken)
+    public async Task Handle(AddUserDiscountCardCommand request, CancellationToken cancellationToken)
     {
         UserIdentity user = await _userRepository.GetUser(request.UserId)
             ?? throw new Exception($"UserId {request.UserId} is not found");
@@ -30,6 +30,6 @@ public class AddUserDiscountCardCommandHandler : IRequestHandler<AddUserDiscount
                 CardNumber = request.CardNumber
             });
 
-        return Unit.Value;
+        return;
     }
 }

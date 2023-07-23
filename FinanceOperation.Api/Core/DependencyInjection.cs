@@ -8,7 +8,7 @@ public static class DependencyInjection
     public static IServiceCollection AddCore(this IServiceCollection services)
     {
         _ = services
-            .AddMediatR(typeof(DependencyInjection).Assembly)
+            .AddMediatR(conf => conf.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly))
             .AddMappingProfiles();
         return services;
     }

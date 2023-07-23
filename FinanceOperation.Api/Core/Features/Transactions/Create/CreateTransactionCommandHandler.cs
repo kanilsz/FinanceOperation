@@ -5,7 +5,7 @@ using MediatR;
 
 namespace FinanceOperation.Api.Core.Features.Transactions.Create;
 
-internal class CreateTransactionCommandHandler : IRequestHandler<CreateTransactionCommand>
+internal class CreateTransactionCommandHandler : IRequestHandler<CreateTransactionCommand, Unit>
 {
     private readonly ITransactionRepository _repository;
     private readonly IMapper _mapper;

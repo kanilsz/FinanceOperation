@@ -12,7 +12,7 @@ internal class DeleteTransactionCommandHandler : IRequestHandler<DeleteTransacti
         _repository = repository;
     }
 
-    public async Task<Unit> Handle(DeleteTransactionCommand request, CancellationToken cancellationToken)
+    public async Task Handle(DeleteTransactionCommand request, CancellationToken cancellationToken)
     {
         IList<Domain.Transactions.Transaction> transactions = await _repository.GetUserTranscations(tr => request.UserId == tr.UserId, cancellationToken);
 
@@ -20,6 +20,6 @@ internal class DeleteTransactionCommandHandler : IRequestHandler<DeleteTransacti
         {
             await _repository.Delete(request.UserId, transaction.Id, cancellationToken);
         }
-        return Unit.Value;
+        return;
     }
 }

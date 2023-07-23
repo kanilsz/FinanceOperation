@@ -5,7 +5,7 @@ using MediatR;
 
 namespace FinanceOperation.Api.Core.Features.Identity.Update;
 
-public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, Unit>
+public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand>
 {
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
@@ -16,12 +16,12 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, Unit>
         _mapper = mapper;
     }
 
-    public async Task<Unit> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
+    public async Task Handle(UpdateUserCommand request, CancellationToken cancellationToken)
     {
         UserIdentity user = _mapper.Map<UserIdentity>(request);
 
         await _userRepository.Update(user);
 
-        return Unit.Value;
+        return;
     }
 }

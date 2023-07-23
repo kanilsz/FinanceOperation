@@ -6,7 +6,7 @@ using MediatR;
 
 namespace FinanceOperation.Api.Core.Features.Identity.Register;
 
-public record RegisterUserCommand : IRequest, IMapTo<UserIdentity>
+public record RegisterUserCommand : IRequest<Unit>, IMapTo<UserIdentity>
 {
     public string FirstName { get; set; }
     public string SecondName { get; set; }

@@ -5,8 +5,8 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["Directory.build.props", "."]
 COPY ["FinanceOperation.Api/FinanceOperation.Api.csproj", "FinanceOperation.Api/"]
+
 RUN dotnet restore "FinanceOperation.Api/FinanceOperation.Api.csproj"
 COPY . .
 WORKDIR "/src/FinanceOperation.Api"

@@ -16,13 +16,13 @@ public class DeleteUserBankCardCommandHandler : IRequestHandler<DeleteUserBankCa
         _bankCardRepository = bankCardRepository;
     }
 
-    public async Task<Unit> Handle(DeleteUserBankCardCommand request, CancellationToken cancellationToken)
+    public async Task Handle(DeleteUserBankCardCommand request, CancellationToken cancellationToken)
     {
         UserIdentity user = await _userRepository.GetUser(request.UserId)
             ?? throw new Exception($"UserId {request.UserId} is not found");
 
         await _bankCardRepository.Remove(request.CardNumber, user.UserId);
 
-        return Unit.Value;
+        return;
     }
 }

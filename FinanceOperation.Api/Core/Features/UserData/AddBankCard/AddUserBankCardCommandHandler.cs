@@ -16,7 +16,7 @@ internal class AddUserBankCardCommandHandler : IRequestHandler<AddUserBankCardCo
         _bankCardRepository = bankCardRepository;
     }
 
-    public async Task<Unit> Handle(AddUserBankCardCommand request, CancellationToken cancellationToken)
+    public async Task Handle(AddUserBankCardCommand request, CancellationToken cancellationToken)
     {
         UserIdentity user = await _userRepository.GetUser(request.UserId)
             ?? throw new Exception($"UserId {request.UserId} is not found");
@@ -29,6 +29,6 @@ internal class AddUserBankCardCommandHandler : IRequestHandler<AddUserBankCardCo
                 CardNumber = request.CardNumber
             });
 
-        return Unit.Value;
+        return;
     }
 }

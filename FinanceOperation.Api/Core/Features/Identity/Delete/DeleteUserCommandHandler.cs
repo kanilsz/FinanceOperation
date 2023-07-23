@@ -12,9 +12,9 @@ internal class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand>
         _userRepository = userRepository;
     }
 
-    public async Task<Unit> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
+    public async Task Handle(DeleteUserCommand request, CancellationToken cancellationToken)
     {
         await _userRepository.Delete(request.UserId);
-        return Unit.Value;
+        return;
     }
 }
