@@ -1,4 +1,8 @@
 # FinanceOperation
+
+[![Docker Build](https://github.com/kanilsz/FinanceOperation/actions/workflows/docker-build.yml/badge.svg)](https://github.com/kanilsz/FinanceOperation/actions/workflows/docker-build.yml)
+[![.NET Cross Platform Build](https://github.com/kanilsz/FinanceOperation/actions/workflows/dotnet.yml/badge.svg)](https://github.com/kanilsz/FinanceOperation/actions/workflows/dotnet.yml)
+[![AppVeyor](https://ci.appveyor.com/api/projects/status/l3kmfu18f4fbmuvu?svg=true)](https://ci.appveyor.com/project/kanilsz/FinanceOperation) 
 ## Main goals for the solution
 ## Techknowledges that are using
 * .NET 7, C#11
