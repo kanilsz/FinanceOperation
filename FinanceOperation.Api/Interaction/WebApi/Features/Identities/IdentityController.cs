@@ -7,7 +7,6 @@ using FinanceOperation.Api.Core.Features.Identity.Update;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.Cosmos;
 
 namespace FinanceOperation.Api.Interactions.WebApi.Features.Identities;
 
