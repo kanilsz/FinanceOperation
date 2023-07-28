@@ -1,6 +1,6 @@
 ﻿using FinanceOperation.Api.Core.Repositories;
 using FinanceOperation.Api.Domain.Users;
-using FinanceOperation.Api.Infrastructure.DbContexts;
+using FinanceOperation.Api.Infrastructure.Databases;
 
 namespace FinanceOperation.Api.Infrastructure.Repositories;
 
@@ -13,57 +13,73 @@ public class UserRepository : IUserRepository
         _context = context;
     }
 
-    public async Task<UserIdentity> GetUser(int userId)
+    public async Task<UserIdentity> GetUser(int id)
     {
-        UserIdentity user;
-        try
+        UserIdentity user = await _context.Users.FindAsync(id)
+              ?? throw new Exception($"Unable to find the user with id {id}");
+
+        if (!user.IsDeleted.HasValue || user.IsDeleted.Value)
         {
-            user = await _context.Users.FindAsync(userId);
+            throw new Exception($"Unable to find the user with id {id}");
         }
-        catch
-        {
-            return default;
-        }
+
         return user;
     }
 
-    public async Task Create(UserIdentity user)
+    public async Task<int> Create(UserIdentity user)
     {
-        _ = await _context.Users.AddAsync(user);
-        _ = await _context.SaveChangesAsync();
+        await _context.Users.AddAsync(user);
+        await _context.SaveChangesAsync();
+
+        return user.Id;
     }
 
-    public IList<UserIdentity> GetUsersInfoList(CancellationToken cancellationToken = default)
+    public async Task Update(UserIdentity user)
     {
-        //FeedResponse<UserIdentity> response = await _container.GetItemLinqQueryable<UserIdentity>()
-        //                                            .ToFeedIterator()
-        //                                            .ReadNextAsync(cancellationToken);
-        //return response.ToList();
-        return default;
+        var userToUpdate = await _context.Users.FindAsync(user.Id)
+            ?? throw new Exception($"Unable to find the user with id {user.Id}");
+
+        UpdateUserInternal(userToUpdate, user);
+        await _context.SaveChangesAsync();
+
+        static void UpdateUserInternal(UserIdentity userToUpdate, UserIdentity newUser)
+        {
+            if (newUser.SecondName is not null && userToUpdate.SecondName != newUser.SecondName)
+            {
+                userToUpdate.SecondName = newUser.SecondName;
+            }
+            if (newUser.PhoneNumber is not null && userToUpdate.PhoneNumber != newUser.PhoneNumber)
+            {
+                userToUpdate.PhoneNumber = newUser.PhoneNumber;
+            }
+            if (newUser.FirstName is not null && userToUpdate.FirstName != newUser.FirstName)
+            {
+                userToUpdate.FirstName = newUser.FirstName;
+            }
+            if (newUser.Email is not null && userToUpdate.Email != newUser.Email)
+            {
+                userToUpdate.Email = newUser.Email;
+            }
+            if (newUser.Password is not null && userToUpdate.Password != newUser.Password)
+            {
+                userToUpdate.Password = newUser.Password;
+            }
+            if (userToUpdate.IsDeleted.HasValue && userToUpdate.IsDeleted.Value != newUser.IsDeleted)
+            {
+                userToUpdate.IsDeleted = newUser.IsDeleted;
+            }
+        }
     }
 
-    public void Update(UserIdentity user)
+    public async Task Delete(int id)
     {
-        // _ = await _container.ReplaceItemAsync(user, user.Id, new(user.Id), _requestOptions, cancellationToken);
-    }
+        var user = await _context.Users.FindAsync(id)
+            ?? throw new Exception($"Unable to find the user with id {id}");
 
-    public void Delete(string userId)
-    {
-        // _ = await _container.DeleteItemAsync<UserIdentity>(userId, new(userId), _requestOptions, cancellationToken);
-    }
+        user.IsDeleted = user.IsDeleted.HasValue && user.IsDeleted.Value
+             ? throw new Exception($"Unable to delete the user with id {id}")
+             : true;
 
-    Task<IList<UserIdentity>> IUserRepository.GetUsersInfoList(CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
-
-    Task IUserRepository.Update(UserIdentity user)
-    {
-        throw new NotImplementedException();
-    }
-
-    Task IUserRepository.Delete(string userId)
-    {
-        throw new NotImplementedException();
+        await _context.SaveChangesAsync();
     }
 }

@@ -18,14 +18,13 @@ internal class AddUserBankCardCommandHandler : IRequestHandler<AddUserBankCardCo
 
     public async Task Handle(AddUserBankCardCommand request, CancellationToken cancellationToken)
     {
-        UserIdentity user = await _userRepository.GetUser(request.UserId)
-            ?? throw new Exception($"UserId {request.UserId} is not found");
+        UserIdentity user = await _userRepository.GetUser(request.UserId);
 
         await _bankCardRepository.Create(
             new BankCard
             {
                 Balance = request.Balance,
-                UserId = user.UserId,
+                UserId = user.Id,
                 CardNumber = request.CardNumber
             });
 

@@ -13,13 +13,13 @@ public class UserIdentity
     }
 
     [Key]
-    public int UserId { get; set; }
+    public int Id { get; set; }
     public string FirstName { get; set; }
     public string SecondName { get; set; }
     public string Email { get; set; }
     public string Password { get; set; }
     public string PhoneNumber { get; set; }
-    public bool IsDeleted { get; set; }
+    public bool? IsDeleted { get; set; } = false;
     public IList<CreditProposition> Credits { get; set; }
     public IList<DepositProposition> Deposits { get; set; }
 }

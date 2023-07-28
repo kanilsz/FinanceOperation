@@ -1,6 +1,6 @@
 ﻿using FinanceOperation.Api.Core.Repositories;
 using FinanceOperation.Api.Infrastructure.Configs;
-using FinanceOperation.Api.Infrastructure.DbContexts;
+using FinanceOperation.Api.Infrastructure.Databases;
 using FinanceOperation.Api.Infrastructure.Repositories;
 using Microsoft.Azure.Cosmos;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +17,9 @@ public static class DependencyInjection
         services.AddTransient<IBankCardRepository, BankCardRepository>()
                 .AddTransient<IDiscountCardRepository, DiscountCardRepository>()
                 .AddTransient<IUserRepository, UserRepository>()
-                .AddTransient<ITransactionRepository, TransactionRepository>();
+                .AddTransient<ITransactionRepository, TransactionRepository>()
+                .AddTransient<IDepositPropositionRepository, DepositPropositionRepository>()
+                .AddTransient<ICreditPropositionRepository, CreditPropositionRepository>();
 
         return services;
     }

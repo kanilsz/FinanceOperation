@@ -19,14 +19,13 @@ public class AddUserDiscountCardCommandHandler : IRequestHandler<AddUserDiscount
 
     public async Task Handle(AddUserDiscountCardCommand request, CancellationToken cancellationToken)
     {
-        UserIdentity user = await _userRepository.GetUser(request.UserId)
-            ?? throw new Exception($"UserId {request.UserId} is not found");
+        UserIdentity user = await _userRepository.GetUser(request.UserId);
 
         await _discountCardRepository.Create(
             new DiscountCard
             {
                 Balance = request.Balance,
-                UserId = user.UserId,
+                UserId = user.Id,
                 CardNumber = request.CardNumber
             });
 

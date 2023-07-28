@@ -38,40 +38,43 @@ public class IdentityController : ControllerBase
     }
 
 
-    [HttpGet("{userId}")]
+    [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserIdentityDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult> GetUserInfo([FromRoute] int userId)
+    public async Task<ActionResult> GetUserInfo([FromRoute] int id)
     {
         return Ok(await _mediator.Send(new GetUserInfoQuery
         {
-            UserId = userId
+            Id = id
         }));
     }
 
-    [HttpPatch("{userId}")]
+    [HttpPatch("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult> UpdateUser([FromRoute] string userId, [FromBody] UpdateUserRequest request)
+    public async Task<ActionResult> UpdateUser([FromRoute] string id, [FromBody] UpdateUserRequest request)
     {
         await _mediator.Send(new UpdateUserCommand
         {
-            UserId = userId,
+            Id = id,
             FirstName = request.FirstName,
             SecondName = request.SecondName,
-            Email = request.Email
+            Email = request.Email,
+            PhoneNumber = request.PhoneNumber,
+            Password = request.Password,
+            IsDeleted = request.IsDeleted
         });
         return NoContent();
     }
 
-    [HttpDelete("{userId}")]
+    [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult> DeleteUser([FromRoute] string userId)
+    public async Task<ActionResult> DeleteUser([FromRoute] int id)
     {
         await _mediator.Send(new DeleteUserCommand
         {
-            UserId = userId
+            Id = id
         });
         return NoContent();
     }
@@ -107,4 +110,6 @@ public record UpdateUserRequest
     public string PhoneNumber { get; set; }
 
     public string Password { get; set; }
+
+    public bool? IsDeleted { get; set; }
 }

@@ -1,5 +1,6 @@
 ﻿using FinanceOperation.Api.Core;
 using FinanceOperation.Api.Infrastructure;
+using FinanceOperation.Api.Infrastructure.Databases;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.OpenApi.Models;
@@ -8,7 +9,6 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
 bool authEnabled = configuration.GetValue<bool>("Auth:Enabled");
 
-// Add services to the container.
 builder.Services.AddCors(c => c.AddPolicy("AllowOrigin", policy => policy.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin()));
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -55,7 +55,6 @@ if (authEnabled)
 
 WebApplication app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     _ = app.UseSwagger();
@@ -73,5 +72,6 @@ if (authEnabled)
 }
 
 app.MapControllers();
+app.Services.MigrateDatabase();
 
 app.Run();

@@ -18,10 +18,9 @@ public class DeleteUserDiscountCardCommandHandler : IRequestHandler<DeleteUserDi
 
     public async Task Handle(DeleteUserDiscountCardCommand request, CancellationToken cancellationToken)
     {
-        UserIdentity user = await _userRepository.GetUser(request.UserId)
-            ?? throw new Exception($"UserId {request.UserId} is not found");
+        UserIdentity user = await _userRepository.GetUser(request.UserId);
 
-        await _discountCardRepository.Remove(request.CardNumber, user.UserId);
+        await _discountCardRepository.Remove(request.CardNumber, user.Id);
 
         return;
     }

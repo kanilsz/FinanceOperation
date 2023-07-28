@@ -19,7 +19,6 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand>
     public async Task Handle(UpdateUserCommand request, CancellationToken cancellationToken)
     {
         UserIdentity user = _mapper.Map<UserIdentity>(request);
-
         await _userRepository.Update(user);
 
         return;

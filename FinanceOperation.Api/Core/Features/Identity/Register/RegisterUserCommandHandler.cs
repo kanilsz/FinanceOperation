@@ -6,7 +6,7 @@ using MediatR;
 
 namespace FinanceOperation.Api.Core.Features.Identity.Register;
 
-public record RegisterUserCommand : IRequest<Unit>, IMapTo<UserIdentity>
+public record RegisterUserCommand : IRequest<int>, IMapTo<UserIdentity>
 {
     public string FirstName { get; set; }
     public string SecondName { get; set; }
@@ -15,7 +15,7 @@ public record RegisterUserCommand : IRequest<Unit>, IMapTo<UserIdentity>
     public string PhoneNumber { get; set; }
 }
 
-public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, Unit>
+public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, int>
 {
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
@@ -26,11 +26,10 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, U
         _mapper = mapper;
     }
 
-    public async Task<Unit> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+    public async Task<int> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {
         UserIdentity user = _mapper.Map<UserIdentity>(request);
 
-        await _userRepository.Create(user);
-        return Unit.Value;
+        return await _userRepository.Create(user);
     }
 }

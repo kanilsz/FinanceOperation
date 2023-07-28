@@ -4,5 +4,5 @@ namespace FinanceOperation.Api.Core.Features.Identity.Delete;
 
 public class DeleteUserCommand : IRequest
 {
-    public string UserId { get; set; }
+    public int Id { get; set; }
 }

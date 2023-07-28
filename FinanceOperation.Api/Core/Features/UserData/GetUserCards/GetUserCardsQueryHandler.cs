@@ -23,11 +23,10 @@ public class GetUserCardsQueryHandler : IRequestHandler<GetUserCardsQuery, Cards
 
     public async Task<CardsDto> Handle(GetUserCardsQuery request, CancellationToken cancellationToken)
     {
-        UserIdentity user = await _userRepository.GetUser(request.UserId)
-            ?? throw new Exception($"UserId {request.UserId} is not found");
+        UserIdentity user = await _userRepository.GetUser(request.UserId);
 
-        var userDiscountCards = await _discountCardRepository.GetUserDiscountCards(user.UserId, cancellationToken);
-        var userBankCards = await _bankCardRepository.GetUserBankCards(user.UserId, cancellationToken);
+        var userDiscountCards = await _discountCardRepository.GetUserDiscountCards(user.Id, cancellationToken);
+        var userBankCards = await _bankCardRepository.GetUserBankCards(user.Id, cancellationToken);
         return new CardsDto
         {
             DiscountCards = _mapper.Map<IList<DiscountCardDto>>(userDiscountCards),

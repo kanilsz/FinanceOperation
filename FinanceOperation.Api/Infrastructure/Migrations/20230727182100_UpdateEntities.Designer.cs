@@ -4,6 +4,7 @@ using FinanceOperation.Api.Infrastructure.Databases;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinanceOperation.Api.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230727182100_UpdateEntities")]
+    partial class UpdateEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,7 +36,7 @@ namespace FinanceOperation.Api.Infrastructure.Migrations
                     b.Property<DateTime>("EndDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("IsDeleted")
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<double>("Percentage")
@@ -45,8 +48,8 @@ namespace FinanceOperation.Api.Infrastructure.Migrations
                     b.Property<DateTime>("StartDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("Summary")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("Summary")
+                        .HasColumnType("float");
 
                     b.Property<int?>("UserId")
                         .HasColumnType("int");
@@ -61,12 +64,12 @@ namespace FinanceOperation.Api.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            EndDateTime = new DateTime(2023, 7, 28, 17, 51, 0, 108, DateTimeKind.Utc).AddTicks(3018),
+                            EndDateTime = new DateTime(2023, 7, 27, 18, 21, 0, 223, DateTimeKind.Utc).AddTicks(5093),
                             IsDeleted = false,
                             Percentage = 1000.0,
-                            PropositionNumber = "e1505ce8-4a6b-4189-a216-59bca8e28280",
-                            StartDateTime = new DateTime(2023, 7, 28, 17, 51, 0, 108, DateTimeKind.Utc).AddTicks(3017),
-                            Summary = 1000m,
+                            PropositionNumber = "01a8a114-bbfc-4ab1-8589-b2fd60ac7094",
+                            StartDateTime = new DateTime(2023, 7, 27, 18, 21, 0, 223, DateTimeKind.Utc).AddTicks(5093),
+                            Summary = 1000.0,
                             UserId = 1
                         },
                         new
@@ -75,9 +78,9 @@ namespace FinanceOperation.Api.Infrastructure.Migrations
                             EndDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             Percentage = 102.0,
-                            PropositionNumber = "ed62b47a-9651-4cbf-a728-1a7bd1847118",
+                            PropositionNumber = "981ee068-a2c2-4fdb-8a2e-8d51dd8b0254",
                             StartDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Summary = 10001m
+                            Summary = 10001.0
                         });
                 });
 
@@ -95,7 +98,7 @@ namespace FinanceOperation.Api.Infrastructure.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("IsDeleted")
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Password")
@@ -117,6 +120,7 @@ namespace FinanceOperation.Api.Infrastructure.Migrations
                             Id = 1,
                             Email = "kon@gmail.com",
                             FirstName = "Maksym",
+                            IsDeleted = false,
                             Password = "password",
                             SecondName = "Konotop"
                         });
@@ -133,7 +137,7 @@ namespace FinanceOperation.Api.Infrastructure.Migrations
                     b.Property<DateTime>("EndDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("IsDeleted")
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<double>("Percentage")
@@ -145,8 +149,8 @@ namespace FinanceOperation.Api.Infrastructure.Migrations
                     b.Property<DateTime>("StartDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("Summary")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("Summary")
+                        .HasColumnType("float");
 
                     b.Property<int?>("UserId")
                         .HasColumnType("int");
@@ -164,19 +168,19 @@ namespace FinanceOperation.Api.Infrastructure.Migrations
                             EndDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             Percentage = 1000.0,
-                            PropositionNumber = "cf4fdeff-c38f-4156-9073-36cfb3ff6cd3",
+                            PropositionNumber = "afe1cf32-43da-48b1-9fcf-6b3e4365c0fa",
                             StartDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Summary = 1000m
+                            Summary = 1000.0
                         },
                         new
                         {
                             Id = 2,
-                            EndDateTime = new DateTime(2023, 7, 28, 17, 51, 0, 108, DateTimeKind.Utc).AddTicks(2954),
+                            EndDateTime = new DateTime(2023, 7, 27, 18, 21, 0, 223, DateTimeKind.Utc).AddTicks(5023),
                             IsDeleted = false,
                             Percentage = 102.0,
-                            PropositionNumber = "e5be29aa-2e38-464e-8769-492625c75ef4",
-                            StartDateTime = new DateTime(2023, 7, 28, 17, 51, 0, 108, DateTimeKind.Utc).AddTicks(2950),
-                            Summary = 10001m,
+                            PropositionNumber = "39c16a3e-a7e2-4efb-9cd7-47dbbef4fd17",
+                            StartDateTime = new DateTime(2023, 7, 27, 18, 21, 0, 223, DateTimeKind.Utc).AddTicks(5022),
+                            Summary = 10001.0,
                             UserId = 1
                         });
                 });

@@ -3,7 +3,7 @@ using FinanceOperation.Api.Domain.Users;
 using FinanceOperation.Domain.Propositions;
 using Microsoft.EntityFrameworkCore;
 
-namespace FinanceOperation.Api.Infrastructure.DbContexts;
+namespace FinanceOperation.Api.Infrastructure.Databases;
 public class ApplicationDbContext : DbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
@@ -28,7 +28,7 @@ public class ApplicationDbContext : DbContext
             .HasData(
             new UserIdentity()
             {
-                UserId = 1,
+                Id = 1,
                 Email = "kon@gmail.com",
                 Password = "password",
                 SecondName = "Konotop",
@@ -41,7 +41,7 @@ public class ApplicationDbContext : DbContext
             {
                 new CreditProposition()
                     {
-                        CreditId = 1,
+                        Id = 1,
                         UserId = null,
                         StartDateTime = default,
                         EndDateTime = default,
@@ -52,7 +52,7 @@ public class ApplicationDbContext : DbContext
                     },
                 new CreditProposition()
                     {
-                        CreditId = 2,
+                        Id = 2,
                         UserId = 1,
                         StartDateTime = DateTime.UtcNow,
                         EndDateTime = DateTime.UtcNow,
@@ -69,7 +69,7 @@ public class ApplicationDbContext : DbContext
             {
                 new DepositProposition()
                     {
-                        DepositId = 1,
+                        Id = 1,
                         UserId = 1,
                         StartDateTime = DateTime.UtcNow,
                         EndDateTime = DateTime.UtcNow,
@@ -80,7 +80,7 @@ public class ApplicationDbContext : DbContext
                     },
                 new DepositProposition()
                     {
-                        DepositId = 2,
+                        Id = 2,
                         UserId = null,
                         StartDateTime = default,
                         EndDateTime = default,
