@@ -59,6 +59,10 @@ public class DepositPropositionRepository : IDepositPropositionRepository
 
         static void UpdateDepositInternal(DepositProposition depositToUpdate, DepositProposition newDeposit)
         {
+            if (depositToUpdate.UserId != newDeposit.UserId)
+            {
+                depositToUpdate.UserId = newDeposit.UserId;
+            }
             if (newDeposit.Percentage != default && depositToUpdate.Percentage != newDeposit.Percentage)
             {
                 depositToUpdate.Percentage = newDeposit.Percentage;

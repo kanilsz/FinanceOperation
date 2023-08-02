@@ -1,6 +1,7 @@
 ﻿using FinanceOperation.Api.Core.Repositories;
 using FinanceOperation.Api.Domain.Users;
 using FinanceOperation.Api.Infrastructure.Databases;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinanceOperation.Api.Infrastructure.Repositories;
 
@@ -15,8 +16,10 @@ public class UserRepository : IUserRepository
 
     public async Task<UserIdentity> GetUser(int id)
     {
-        UserIdentity user = await _context.Users.FindAsync(id)
-              ?? throw new Exception($"Unable to find the user with id {id}");
+        UserIdentity user = await _context.Users
+             .Include(c => c.Credits)
+             .Include(d=> d.Deposits)
+             .FirstOrDefaultAsync(u => u.Id == id) ?? throw new Exception($"Unable to find the user with id {id}");
 
         if (!user.IsDeleted.HasValue || user.IsDeleted.Value)
         {

@@ -1,4 +1,5 @@
 ﻿using FinanceOperation.Api.Core.Features.Identity;
+using FinanceOperation.Api.Core.Features.UserData.GetUserData;
 using FinanceOperation.Api.Core.Features.Users.AddBankCard;
 using FinanceOperation.Api.Core.Features.Users.AddDiscountCard;
 using FinanceOperation.Api.Core.Features.Users.DeleteBankCards;
@@ -18,6 +19,12 @@ public class UserController : ControllerBase
     {
         _mediator = mediator;
     }
+
+    [HttpGet("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserDataDto))]
+    public async Task<ActionResult> GetUserData([FromRoute] int id) =>
+         Ok(await _mediator.Send(new GetUserDataQuery(id)));
+
 
     [HttpGet("{userId}/cards")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CardsDto))]

@@ -30,35 +30,28 @@ public class GetTransactionsByUserIdQueryHandler : IRequestHandler<GetTransactio
                 if (incomes.Any(i => i.BankName == transaction.BankName))
                 {
                     incomes.First(i => i.BankName == transaction.BankName).Summary += sum;
-                }
-                else
-                {
-                    incomes.Add(new Statistic()
-                    {
-                        BankName = transaction.BankName,
-                        Summary = sum
-                    });
+                    continue;
                 }
 
+                incomes.Add(new Statistic()
+                {
+                    BankName = transaction.BankName,
+                    Summary = sum
+                });
                 continue;
             }
-            else if (transaction.Summary.StartsWith("-"))
+
+            if (outcomes.Any(i => i.BankName == transaction.BankName))
             {
-                if (outcomes.Any(i => i.BankName == transaction.BankName))
-                {
-                    outcomes.First(i => i.BankName == transaction.BankName).Summary += sum;
-                }
-                else
-                {
-                    outcomes.Add(new Statistic()
-                    {
-                        BankName = transaction.BankName,
-                        Summary = sum
-                    });
-                }
-
+                outcomes.First(i => i.BankName == transaction.BankName).Summary += sum;
                 continue;
             }
+            outcomes.Add(new Statistic()
+            {
+                BankName = transaction.BankName,
+                Summary = sum
+            });
+
 
         }
 

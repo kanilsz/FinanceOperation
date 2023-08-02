@@ -58,6 +58,10 @@ public class CreditPropositionRepository : ICreditPropositionRepository
 
         static void UpdateCreditInternal(CreditProposition creditToUpdate, CreditProposition newCredit)
         {
+            if (creditToUpdate.UserId != newCredit.UserId)
+            {
+                creditToUpdate.UserId = newCredit.UserId;
+            }
             if (newCredit.Percentage != default && creditToUpdate.Percentage != newCredit.Percentage)
             {
                 creditToUpdate.Percentage = newCredit.Percentage;
