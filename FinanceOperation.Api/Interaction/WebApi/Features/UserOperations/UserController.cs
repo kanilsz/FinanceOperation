@@ -1,10 +1,10 @@
-﻿using FinanceOperation.Api.Core.Features.Identity;
-using FinanceOperation.Api.Core.Features.UserData.GetUserData;
+﻿using FinanceOperation.Api.Core.Features.UserData.GetUserData;
 using FinanceOperation.Api.Core.Features.Users.AddBankCard;
 using FinanceOperation.Api.Core.Features.Users.AddDiscountCard;
 using FinanceOperation.Api.Core.Features.Users.DeleteBankCards;
 using FinanceOperation.Api.Core.Features.Users.DeleteDiscountCards;
 using FinanceOperation.Api.Core.Features.Users.GetUserCards;
+using FinanceOperation.Api.Interaction.WebApi.Features.UserOperations.OData;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,6 +20,7 @@ public class UserController : ControllerBase
         _mediator = mediator;
     }
 
+    [EnableOData]
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserDataDto))]
     public async Task<ActionResult> GetUserData([FromRoute] int id) =>
