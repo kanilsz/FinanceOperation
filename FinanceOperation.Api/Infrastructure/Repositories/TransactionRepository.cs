@@ -22,12 +22,12 @@ public class TransactionRepository : ITransactionRepository
 
     public async Task Create(Transaction transaction, CancellationToken cancellationToken = default)
     {
-        _ = await _container.CreateItemAsync(transaction, new(transaction.UserId), _requestOptions, cancellationToken);
+        await _container.CreateItemAsync(transaction, new(transaction.UserId), _requestOptions, cancellationToken);
     }
 
     public async Task Delete(string userId, string transactionId, CancellationToken cancellationToken = default)
     {
-        _ = await _container.DeleteItemAsync<Transaction>(transactionId, new(userId), _requestOptions, cancellationToken);
+        await _container.DeleteItemAsync<Transaction>(transactionId, new(userId), _requestOptions, cancellationToken);
     }
 
     public async Task<IList<Transaction>> GetUserTranscations(Expression<Func<Transaction, bool>> predicate, CancellationToken cancellationToken = default)

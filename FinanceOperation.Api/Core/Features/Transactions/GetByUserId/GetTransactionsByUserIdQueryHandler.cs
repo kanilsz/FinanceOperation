@@ -4,7 +4,12 @@ using MediatR;
 
 namespace FinanceOperation.Api.Core.Features.Transactions.GetByUserId;
 
-public class GetTransactionsByUserIdQueryHandler : IRequestHandler<GetTransactionsByUserIdQuery, UserIncomeOutcome>
+public sealed record GetTransactionsByUserIdQuery : IRequest<UserIncomeOutcome>
+{
+    public string UserId { get; set; }
+}
+
+internal class GetTransactionsByUserIdQueryHandler : IRequestHandler<GetTransactionsByUserIdQuery, UserIncomeOutcome>
 {
     private readonly ITransactionRepository _repository;
 

@@ -31,7 +31,7 @@ public class TransactionController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> DeleteUserTransactions([FromRoute] string userId)
     {
-        await _mediator.Send(new DeleteTransactionCommand
+        await _mediator.Send(new DeleteUserTransactionsCommand
         {
             UserId = userId
         });

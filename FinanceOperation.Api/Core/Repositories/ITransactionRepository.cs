@@ -1,5 +1,4 @@
-﻿
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using FinanceOperation.Api.Domain.Transactions;
 
 namespace FinanceOperation.Api.Core.Repositories;
