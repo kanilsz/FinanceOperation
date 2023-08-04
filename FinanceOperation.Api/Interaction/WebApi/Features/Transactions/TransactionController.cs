@@ -52,3 +52,10 @@ public class TransactionController : ControllerBase
         }));
     }
 }
+
+public record CreateUserTransactionRequest
+{
+    public required string UserId { get; set; }
+    public required string BankName { get; set; }
+    public required string Summary { get; set; }
+}

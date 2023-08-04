@@ -1,9 +1,7 @@
 ﻿using FinanceOperation.Api.Core.Features.Propositions;
 using FinanceOperation.Api.Core.Features.Propositions.Add;
-using FinanceOperation.Api.Core.Features.Propositions.Get;
 using FinanceOperation.Api.Core.Features.Propositions.Get.CreditDetails;
 using FinanceOperation.Api.Core.Features.Propositions.Get.DepositDetails;
-using FinanceOperation.Api.Core.Features.Propositions.GetList;
 using FinanceOperation.Api.Core.Features.Propositions.GetList.Credits;
 using FinanceOperation.Api.Core.Features.Propositions.GetList.Deposits;
 using FinanceOperation.Api.Core.Features.Propositions.Remove;
