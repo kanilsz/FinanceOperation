@@ -5,6 +5,12 @@ using MediatR;
 
 namespace FinanceOperation.Api.Core.Features.Identity.Get;
 
+public sealed record GetUserInfoQuery : IRequest<UserIdentityDto>
+{
+    public int Id { get; set; }
+}
+
+
 public class GetUserInfoQueryHandler : IRequestHandler<GetUserInfoQuery, UserIdentityDto>
 {
     private readonly IUserRepository _userRepository;

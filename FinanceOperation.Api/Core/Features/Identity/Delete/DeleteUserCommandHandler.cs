@@ -3,6 +3,12 @@ using MediatR;
 
 namespace FinanceOperation.Api.Core.Features.Identity.Delete;
 
+public sealed record DeleteUserCommand : IRequest
+{
+    public int Id { get; set; }
+}
+
+
 internal class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand>
 {
     private readonly IUserRepository _userRepository;
