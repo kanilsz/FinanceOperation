@@ -6,15 +6,18 @@
 ## Techknowledges that are using
 * .NET 7, C#11
 * ASP.NET Core 7 Web Api
-* Docker
-* Blazor WebAssembly
-* MediatR
-* Swagger
+* Entity Framework Core 7
 * Azure Cosmos DB SDK
 * MSA.BuildingBlocks.Mapping which using AutoMapper
-* Entity Framework Core 7
-* React (is going to be deprecated here and replaced by Blazor WebAssembly solution)
-* XUnit and Moq for unit tests
-* GitHub Actions which build dotnet solutions on (Windows, MacOS, Linux) and docker containers
+* Swagger
+* MediatR
 * ODATA protocol
-  
+* XUnit and Moq for unit tests
+* Docker
+* GitHub Actions which build dotnet solutions on (Windows, MacOS, Linux) and docker containers
+
+Gonna be used in near future
+* SignalR
+* Blazor WebAssembly
+* MSA.BuildingBlocks.ServiceClient for making HTTP client for communicating with Finance Operation Service API
+* Python (with libraries to analyze bank propositins)
