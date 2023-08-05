@@ -5,6 +5,13 @@ using MediatR;
 
 namespace FinanceOperation.Api.Core.Features.Users.AddBankCard;
 
+public record AddUserBankCardCommand : IRequest
+{
+    public int UserId { get; set; }
+    public string CardNumber { get; set; }
+    public double Balance { get; set; }
+}
+
 internal class AddUserBankCardCommandHandler : IRequestHandler<AddUserBankCardCommand>
 {
     private readonly IUserRepository _userRepository;

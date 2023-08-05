@@ -1,10 +1,17 @@
 ﻿using FinanceOperation.Api.Core.Repositories;
 using FinanceOperation.Api.Domain.Cards;
 using FinanceOperation.Api.Domain.Users;
-using FinanceOperation.Api.Infrastructure.Repositories;
 using MediatR;
 
 namespace FinanceOperation.Api.Core.Features.Users.AddDiscountCard;
+
+public record AddUserDiscountCardCommand : IRequest
+{
+    public int UserId { get; set; }
+    public string CardNumber { get; set; }
+    public double Balance { get; set; }
+}
+
 
 public class AddUserDiscountCardCommandHandler : IRequestHandler<AddUserDiscountCardCommand>
 {

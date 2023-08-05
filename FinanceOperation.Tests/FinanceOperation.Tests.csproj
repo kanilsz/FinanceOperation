@@ -24,4 +24,8 @@
     <ProjectReference Include="..\FinanceOperation.Api\FinanceOperation.Api.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Transactions\" />
+  </ItemGroup>
+
 </Project>

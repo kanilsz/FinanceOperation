@@ -6,6 +6,11 @@ using MediatR;
 
 namespace FinanceOperation.Api.Core.Features.Users.GetUserCards;
 
+public record GetUserCardsQuery : IRequest<CardsDto>
+{
+    public int UserId { get; set; }
+}
+
 public class GetUserCardsQueryHandler : IRequestHandler<GetUserCardsQuery, CardsDto>
 {
     private readonly IUserRepository _userRepository;

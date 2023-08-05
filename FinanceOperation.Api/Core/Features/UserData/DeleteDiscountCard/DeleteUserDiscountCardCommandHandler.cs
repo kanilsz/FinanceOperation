@@ -1,9 +1,14 @@
 ﻿using FinanceOperation.Api.Core.Repositories;
 using FinanceOperation.Api.Domain.Users;
-using FinanceOperation.Api.Infrastructure.Repositories;
 using MediatR;
 
 namespace FinanceOperation.Api.Core.Features.Users.DeleteDiscountCards;
+
+public record DeleteUserDiscountCardCommand : IRequest
+{
+    public int UserId { get; set; }
+    public string CardNumber { get; set; }
+}
 
 public class DeleteUserDiscountCardCommandHandler : IRequestHandler<DeleteUserDiscountCardCommand>
 {
