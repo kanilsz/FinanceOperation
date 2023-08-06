@@ -1,0 +1,27 @@
+﻿@page "/credits"
+
+@using FinanceOperation.BlazorWebAssembly.HttpClients;
+@inject FinanceServiceClient Client;
+
+<PageTitle>@nameof(Credits)</PageTitle>
+
+<h1>Credits</h1>
+<div>
+    @foreach (var proposition in propositions)
+    {
+        <div>
+            <p>Number :@proposition.PropositionNumber</p>
+            <p>Percentage :@proposition.Percentage</p>
+            <p>Summary :@proposition.Summary</p>
+        </div>
+    }
+</div>
+
+@code {
+    private IEnumerable<CreditProposition> propositions { get; set; } = new List<CreditProposition>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        propositions = await Client.GetCredits();
+    }
+}
