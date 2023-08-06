@@ -21,3 +21,4 @@ Gonna be used in near future
 * Blazor WebAssembly
 * MSA.BuildingBlocks.ServiceClient for making HTTP client for communicating with Finance Operation Service API
 * Python (with libraries to analyze bank propositins)
+* Xamarin for mobile app
