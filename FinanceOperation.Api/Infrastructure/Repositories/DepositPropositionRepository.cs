@@ -46,7 +46,9 @@ public class DepositPropositionRepository : IDepositPropositionRepository
 
     public IList<DepositProposition> GetDepositList(CancellationToken token)
     {
-        return _context.Deposits.ToList();
+        return _context.Deposits
+            .Where(c => c.UserId == null)
+            .ToList();
     }
 
     public async Task Update(DepositProposition depositProposition)

@@ -45,7 +45,9 @@ public class CreditPropositionRepository : ICreditPropositionRepository
 
     public IList<CreditProposition> GetCreditList(CancellationToken token = default)
     {
-        return _context.Credits.ToList();
+        return _context.Credits
+            .Where(c=> c.UserId == null)
+            .ToList();
     }
 
     public async Task Update(CreditProposition creditProposition)
