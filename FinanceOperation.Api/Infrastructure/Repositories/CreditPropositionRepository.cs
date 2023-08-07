@@ -43,10 +43,10 @@ public class CreditPropositionRepository : ICreditPropositionRepository
         return credit;
     }
 
-    public IList<CreditProposition> GetCreditList(CancellationToken token = default)
+    public IList<CreditProposition> GetCreditList(int? userId, CancellationToken token = default)
     {
         return _context.Credits
-            .Where(c=> c.UserId == null)
+            .Where(c=> c.UserId == userId)
             .ToList();
     }
 

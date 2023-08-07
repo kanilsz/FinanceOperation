@@ -44,10 +44,10 @@ public class DepositPropositionRepository : IDepositPropositionRepository
         return deposit;
     }
 
-    public IList<DepositProposition> GetDepositList(CancellationToken token)
+    public IList<DepositProposition> GetDepositList(int? userId, CancellationToken token = default)
     {
         return _context.Deposits
-            .Where(c => c.UserId == null)
+            .Where(c => c.UserId == userId)
             .ToList();
     }
 

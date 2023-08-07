@@ -4,7 +4,7 @@ using MediatR;
 
 namespace FinanceOperation.Api.Core.Features.Propositions.GetList.Deposits;
 
-public sealed record GetDepositPropositionsQuery : IRequest<IList<DepositPropositionDto>>;
+public sealed record GetDepositPropositionsQuery(int? UserId) : IRequest<IList<DepositPropositionDto>>;
 
 public sealed class GetDepositPropositionsQueryHandler : IRequestHandler<GetDepositPropositionsQuery, IList<DepositPropositionDto>>
 {
@@ -19,7 +19,7 @@ public sealed class GetDepositPropositionsQueryHandler : IRequestHandler<GetDepo
 
     public Task<IList<DepositPropositionDto>> Handle(GetDepositPropositionsQuery request, CancellationToken cancellationToken)
     {   
-        var deposits = _depositPropositionRepository.GetDepositList(cancellationToken);
+        var deposits = _depositPropositionRepository.GetDepositList(request.UserId, cancellationToken);
         return Task.FromResult(_mapper.Map<IList<DepositPropositionDto>>(deposits));
     }
 }

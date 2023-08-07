@@ -4,7 +4,7 @@ using MediatR;
 
 namespace FinanceOperation.Api.Core.Features.Propositions.GetList.Credits;
 
-public sealed record GetCreditPropositionsQuery : IRequest<IList<CreditPropositionDto>>;
+public sealed record GetCreditPropositionsQuery(int? UserId) : IRequest<IList<CreditPropositionDto>>;
 
 public sealed class GetCreditPropositionsQueryHandler : IRequestHandler<GetCreditPropositionsQuery, IList<CreditPropositionDto>>
 {
@@ -19,7 +19,7 @@ public sealed class GetCreditPropositionsQueryHandler : IRequestHandler<GetCredi
 
     public Task<IList<CreditPropositionDto>> Handle(GetCreditPropositionsQuery request, CancellationToken cancellationToken)
     {
-        var deposits = _creditPropositionRepository.GetCreditList(cancellationToken);
+        var deposits = _creditPropositionRepository.GetCreditList(request.UserId, cancellationToken);
         return Task.FromResult(_mapper.Map<IList<CreditPropositionDto>>(deposits));
     }
 }

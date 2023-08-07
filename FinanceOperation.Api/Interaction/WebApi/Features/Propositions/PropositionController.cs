@@ -61,13 +61,13 @@ public class PropositionController : ControllerBase
 
     [HttpGet("credits")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<CreditPropositionDto>))]
-    public async Task<ActionResult<IEnumerable<CreditPropositionDto>>> GetCreditPropositions() =>
-         Ok(await _mediator.Send(new GetCreditPropositionsQuery()));
+    public async Task<ActionResult<IEnumerable<CreditPropositionDto>>> GetCreditPropositions([FromQuery]int? userId) =>
+         Ok(await _mediator.Send(new GetCreditPropositionsQuery(userId)));
 
     [HttpGet("deposits")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<DepositPropositionDto>))]
-    public async Task<ActionResult<IEnumerable<DepositPropositionDto>>> GetDepositPropositions() =>
-         Ok(await _mediator.Send(new GetDepositPropositionsQuery()));
+    public async Task<ActionResult<IEnumerable<DepositPropositionDto>>> GetDepositPropositions([FromQuery] int? userId) =>
+         Ok(await _mediator.Send(new GetDepositPropositionsQuery(userId)));
 
     [HttpGet("credits/{id}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CreditPropositionDto))]
