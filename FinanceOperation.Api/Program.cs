@@ -1,4 +1,5 @@
-﻿using FinanceOperation.Api.Core;
+﻿using FinanceOperation.Api.Common.Web.ErrorMiddleware;
+using FinanceOperation.Api.Core;
 using FinanceOperation.Api.Infrastructure;
 using FinanceOperation.Api.Infrastructure.Databases;
 using FinanceOperation.Api.Interaction.WebApi.Features.UserOperations.OData;
@@ -58,11 +59,15 @@ if (authEnabled)
 
 WebApplication app = builder.Build();
 
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseHsts();
+app.UseErrorHandlerMiddleware();
 
 app.UseCors(options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
