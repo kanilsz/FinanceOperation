@@ -2,6 +2,7 @@
 using FinanceOperation.Api.Core.Features.Identity;
 using FinanceOperation.Api.Core.Features.Identity.Delete;
 using FinanceOperation.Api.Core.Features.Identity.Get;
+using FinanceOperation.Api.Core.Features.Identity.Login;
 using FinanceOperation.Api.Core.Features.Identity.Register;
 using FinanceOperation.Api.Core.Features.Identity.Update;
 using MediatR;
@@ -20,7 +21,7 @@ public class IdentityController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpPost]
+    [HttpPost("register")]
     [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -35,6 +36,22 @@ public class IdentityController : ControllerBase
             FirstName = request.FirstName,
             SecondName = request.SecondName,
         }));
+    }
+
+    [HttpPost("login")]
+    [AllowAnonymous]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult> LoginIdentity([FromBody] LoginUserRequest request)
+    {
+        await _mediator.Send(new LoginUserCommand
+        {
+            Email = request.Email,
+            Password = request.Password,
+        });
+        return Ok();
     }
 
 
@@ -96,6 +113,15 @@ public record RegisterUserRequest()
     public string SecondName { get; set; }
 
     public string PhoneNumber { get; set; }
+}
+
+public record LoginUserRequest()
+{
+    [Required, EmailAddress]
+    public string Email { get; set; }
+
+    [Required]
+    public string Password { get; set; }
 }
 
 public record UpdateUserRequest

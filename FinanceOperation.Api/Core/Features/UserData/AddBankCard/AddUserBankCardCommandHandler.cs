@@ -25,7 +25,7 @@ internal class AddUserBankCardCommandHandler : IRequestHandler<AddUserBankCardCo
 
     public async Task Handle(AddUserBankCardCommand request, CancellationToken cancellationToken)
     {
-        UserIdentity user = await _userRepository.GetUser(request.UserId);
+        UserIdentity user = await _userRepository.GetUserBy(user => user.Id == request.UserId);
 
         await _bankCardRepository.Create(
             new BankCard

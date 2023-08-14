@@ -1,4 +1,6 @@
-﻿using FinanceOperation.Api.Core.Repositories;
+﻿using System.Linq;
+using System.Linq.Expressions;
+using FinanceOperation.Api.Core.Repositories;
 using FinanceOperation.Api.Domain.Users;
 using FinanceOperation.Api.Infrastructure.Databases;
 using Microsoft.EntityFrameworkCore;
@@ -14,16 +16,17 @@ public class UserRepository : IUserRepository
         _context = context;
     }
 
-    public async Task<UserIdentity> GetUser(int id)
+    public async Task<UserIdentity> GetUserBy(Expression<Func<UserIdentity, bool>> predicate)
     {
         UserIdentity user = await _context.Users
              .Include(c => c.Credits)
-             .Include(d=> d.Deposits)
-             .FirstOrDefaultAsync(u => u.Id == id) ?? throw new Exception($"Unable to find the user with id {id}");
+             .Include(d => d.Deposits)
+             .Where(predicate)
+             .FirstOrDefaultAsync();
 
         if (!user.IsDeleted.HasValue || user.IsDeleted.Value)
         {
-            throw new Exception($"Unable to find the user with id {id}");
+            return default;
         }
 
         return user;

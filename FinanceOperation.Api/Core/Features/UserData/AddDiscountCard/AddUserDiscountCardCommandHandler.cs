@@ -26,7 +26,7 @@ public class AddUserDiscountCardCommandHandler : IRequestHandler<AddUserDiscount
 
     public async Task Handle(AddUserDiscountCardCommand request, CancellationToken cancellationToken)
     {
-        UserIdentity user = await _userRepository.GetUser(request.UserId);
+        UserIdentity user = await _userRepository.GetUserBy(user => user.Id == request.UserId);
 
         await _discountCardRepository.Create(
             new DiscountCard

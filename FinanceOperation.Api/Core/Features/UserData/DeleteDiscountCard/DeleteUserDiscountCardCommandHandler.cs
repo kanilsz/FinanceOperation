@@ -23,7 +23,7 @@ public class DeleteUserDiscountCardCommandHandler : IRequestHandler<DeleteUserDi
 
     public async Task Handle(DeleteUserDiscountCardCommand request, CancellationToken cancellationToken)
     {
-        UserIdentity user = await _userRepository.GetUser(request.UserId);
+        UserIdentity user = await _userRepository.GetUserBy(user => user.Id == request.UserId);
 
         await _discountCardRepository.Remove(request.CardNumber, user.Id);
 

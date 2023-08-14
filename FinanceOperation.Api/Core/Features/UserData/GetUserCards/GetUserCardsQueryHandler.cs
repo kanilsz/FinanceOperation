@@ -28,7 +28,7 @@ public class GetUserCardsQueryHandler : IRequestHandler<GetUserCardsQuery, Cards
 
     public async Task<CardsDto> Handle(GetUserCardsQuery request, CancellationToken cancellationToken)
     {
-        UserIdentity user = await _userRepository.GetUser(request.UserId);
+        UserIdentity user = await _userRepository.GetUserBy(user => user.Id == request.UserId);
 
         var userDiscountCards = await _discountCardRepository.GetUserDiscountCards(user.Id, cancellationToken);
         var userBankCards = await _bankCardRepository.GetUserBankCards(user.Id, cancellationToken);

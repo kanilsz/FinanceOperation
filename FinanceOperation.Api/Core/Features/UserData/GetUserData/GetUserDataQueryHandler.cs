@@ -25,7 +25,7 @@ public class GetUserDataQueryHandler : IRequestHandler<GetUserDataQuery, UserDat
 
     public async Task<UserDataDto> Handle(GetUserDataQuery request, CancellationToken cancellationToken)
     {
-        UserIdentity user = await _userRepository.GetUser(request.UserId);
+        UserIdentity user = await _userRepository.GetUserBy(user => user.Id == request.UserId);
         UserDataDto userDataDto = _mapper.Map<UserDataDto>(user);
 
         var userBankCards = await _bankCardRepository.GetUserBankCards(user.Id, cancellationToken);

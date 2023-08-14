@@ -23,7 +23,7 @@ public class DeleteUserBankCardCommandHandler : IRequestHandler<DeleteUserBankCa
 
     public async Task Handle(DeleteUserBankCardCommand request, CancellationToken cancellationToken)
     {
-        UserIdentity user = await _userRepository.GetUser(request.UserId);
+        UserIdentity user = await _userRepository.GetUserBy(user => user.Id == request.UserId);
 
         await _bankCardRepository.Remove(request.CardNumber, user.Id);
 
