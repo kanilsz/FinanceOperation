@@ -5,11 +5,12 @@ namespace FinanceOperation.BlazorWebAssembly.HttpClients;
 
 public class FinanceServiceClient : ServiceClientBase
 {
-    private const string CreditsPropositionSegment = "/v1/propositions/credits";
-    private const string DepositsPropositionSegment = "/v1/propositions/deposits";
+    private const string CreditsPropositionSegment = "propositions/credits";
+    private const string DepositsPropositionSegment = "propositions/deposits";
+    private const string ApiVersion = "v1";
 
-    public FinanceServiceClient(HttpClient httpClient, ILogger<ServiceClientBase> logger) 
-        : base(httpClient, logger)
+    public FinanceServiceClient(HttpClient httpClient, ILogger<ServiceClientBase> logger)
+        : base(httpClient, ApiVersion, logger)
     {
     }
 
@@ -19,7 +20,8 @@ public class FinanceServiceClient : ServiceClientBase
             .AppendPathSegment(CreditsPropositionSegment)
             .WithHttpMethod(HttpMethod.Get);
 
-        return (await Send<IEnumerable<CreditProposition>>(requestMessage)).Payload;
+        ServiceResponse<IEnumerable<CreditProposition>> response = await SendAsync<IEnumerable<CreditProposition>>(requestMessage);
+        return response.Payload;
     }
 
     public async Task<IEnumerable<DepositProposition>> GetDeposits()
@@ -28,7 +30,8 @@ public class FinanceServiceClient : ServiceClientBase
             .AppendPathSegment(DepositsPropositionSegment)
             .WithHttpMethod(HttpMethod.Get);
 
-        return (await Send<IEnumerable<DepositProposition>>(requestMessage)).Payload;
+        ServiceResponse<IEnumerable<DepositProposition>> response = await SendAsync<IEnumerable<DepositProposition>>(requestMessage);
+        return response.Payload;
     }
 }
 
