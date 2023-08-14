@@ -7,8 +7,10 @@
 * .NET 7, C#11
 * ASP.NET Core 7 Web Api
 * Entity Framework Core 7
+* Blazor WebAssembly
 * Azure Cosmos DB SDK
 * MSA.BuildingBlocks.Mapping which using AutoMapper
+* MSA.BuildingBlocks.ServiceClient for making HTTP client for communicating with Finance Operation Service API
 * Swagger
 * MediatR
 * ODATA protocol
@@ -18,7 +20,5 @@
 
 Gonna be used in near future
 * SignalR
-* Blazor WebAssembly
-* MSA.BuildingBlocks.ServiceClient for making HTTP client for communicating with Finance Operation Service API
 * Python (with libraries to analyze bank propositins)
 * Xamarin for mobile app
